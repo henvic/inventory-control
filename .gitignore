@@ -1,0 +1,25 @@
+.idea
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+.settings
+.project
+.buildpath
+# Mac
+.DS_Store
+.Spotlight-V100
+.Trashes
+# KDE
+.directory
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+/nbproject
+
+inventory-control.iml
