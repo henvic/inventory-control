@@ -118,6 +118,18 @@ public class Tests {
         }
     }
 
+
+    public boolean updateMockProductPrototype(String id) {
+        try {
+            facade.updateProductPrototype(id, 4000, "Canon 5D Mark IV", "Adorama");
+            return true;
+        } catch (ObjectNotFoundException ignore) {
+        } catch (InvalidInputException ignore) {
+        }
+
+        return false;
+    }
+
     public void run() {
         String temp;
         System.out.println("inventory-control");
@@ -133,8 +145,8 @@ public class Tests {
 
         //CRUD for productPrototype
         this.cantCreateProductPrototype();
-        this.createMockProductPrototype();
-        //test createProductPrototype
+        temp = this.createMockProductPrototype();
+        this.updateMockProductPrototype(temp);
     }
 
     public Tests(Facade facade) {
