@@ -19,4 +19,10 @@ public class Product extends ProductAbstract {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public Product(String id, int price, String description, String vendor, int prototype, int amount) {
+        super(id, price, description, vendor);
+        this.prototype = prototype;
+        this.amount = amount;
+    }
 }
