@@ -11,33 +11,39 @@ abstract public class ActorManager {
         this.repo = repo;
     }
 
-    public void validate(Actor actor) throws MissingRolesException, InvalidInputException {
+    public void validate(String name, String company, String email, String phone, String address,
+                         boolean buyer, boolean seller) throws MissingRolesException, InvalidInputException {
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
                 "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-        if (actor.getName().length() < 1) {
+        if (name.length() < 1) {
             throw new InvalidInputException("name");
         }
 
-        if (actor.getCompany() == null) {
+        if (company == null) {
             throw new InvalidInputException("company");
         }
 
-        if (!actor.getEmail().matches(emailPattern)) {
+        if (!email.matches(emailPattern)) {
             throw new InvalidInputException("email");
         }
 
-        if (actor.getPhone().length() < 1) {
+        if (phone.length() < 1) {
             throw new InvalidInputException("phone");
         }
 
-        if (actor.getAddress().length() < 1) {
+        if (address.length() < 1) {
             throw new InvalidInputException("address");
         }
 
-        if (!actor.isBuyer() && !actor.isSeller()) {
+        if (!buyer && !seller) {
             throw new MissingRolesException();
         }
+    }
+
+    public void validate(Actor actor) throws MissingRolesException, InvalidInputException {
+        this.validate(actor.getName(), actor.getCompany(), actor.getEmail(), actor.getPhone(),
+                actor.getAddress(), actor.isBuyer(), actor.isSeller());
     }
 
     public void add(Actor item)
