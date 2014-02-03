@@ -11,7 +11,39 @@ abstract public class ActorManager {
         this.repo = repo;
     }
 
-    public void add(Actor item) throws ObjectAlreadyExistsException {
+    public void validate(Actor actor) throws MissingRolesException, InvalidInputException {
+        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        if (actor.getName().length() < 1) {
+            throw new InvalidInputException("name");
+        }
+
+        if (actor.getCompany() == null) {
+            throw new InvalidInputException("company");
+        }
+
+        if (!actor.getEmail().matches(emailPattern)) {
+            throw new InvalidInputException("email");
+        }
+
+        if (actor.getPhone().length() < 1) {
+            throw new InvalidInputException("phone");
+        }
+
+        if (actor.getAddress().length() < 1) {
+            throw new InvalidInputException("address");
+        }
+
+        if (!actor.isBuyer() && !actor.isSeller()) {
+            throw new MissingRolesException();
+        }
+    }
+
+    public void add(Actor item)
+            throws ObjectAlreadyExistsException, MissingRolesException, InvalidInputException {
+        this.validate(item);
+
         if (repo.has(item.getId())) {
             throw new ObjectAlreadyExistsException();
         }
