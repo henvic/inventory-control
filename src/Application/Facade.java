@@ -30,6 +30,8 @@ public class Facade {
 
         actor = new Actor(id, name, company, email, phone, address, buyer, seller);
 
+        actorManager.validate(name, company, email, phone, address, buyer, seller);
+
         try {
             if (buyer) {
                 buyerManager.add(actor);
