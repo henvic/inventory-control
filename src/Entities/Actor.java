@@ -5,7 +5,9 @@ public class Actor extends Item {
     private String company;
     private String email;
     private String phone;
-    private Address address;
+    private String address;
+    private boolean buyer;
+    private boolean seller;
 
     public String getName() {
         return name;
@@ -39,11 +41,15 @@ public class Actor extends Item {
         this.phone = phone;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
     public Actor() {
         address = new Address();
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     }
 }
