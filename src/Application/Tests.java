@@ -6,6 +6,8 @@ import Exceptions.*;
 public class Tests {
     private Facade facade;
 
+    private void test(boolean result, String what) {
+        System.out.println(what + " = " + ((result) ? " ok" : " failed"));
     }
 
     private boolean cantCreateMockActor() {
