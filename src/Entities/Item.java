@@ -1,13 +1,17 @@
 package Entities;
 
 public abstract class Item {
-    private int id;
+    private String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    protected Item(String id) {
         this.id = id;
     }
 }
