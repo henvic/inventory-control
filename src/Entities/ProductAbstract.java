@@ -2,7 +2,7 @@ package Entities;
 
 public abstract class ProductAbstract extends Item {
     private int price;
-    private String description = "";
+    private String description;
     private String vendor;
 
     public int getPrice() {
@@ -26,6 +26,13 @@ public abstract class ProductAbstract extends Item {
     }
 
     public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+    protected ProductAbstract(String id, int price, String description, String vendor) {
+        super(id);
+        this.price = price;
+        this.description = description;
         this.vendor = vendor;
     }
 }
