@@ -10,6 +10,7 @@ public class Tests {
         System.out.println(what + " = " + ((result) ? " ok" : " failed"));
     }
 
+    //actor
     private boolean cantCreateMockActor() {
         try {
             facade.createActor("Joseph",
@@ -87,6 +88,7 @@ public class Tests {
         }
     }
 
+    //product prototype
     public boolean cantCreateProductPrototype() {
         try {
             facade.createProductPrototype("B00CO8TBQ0",
