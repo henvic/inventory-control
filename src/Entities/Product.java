@@ -28,8 +28,8 @@ public class Product extends ProductAbstract {
         this.increaseAmount(- diff);
     }
 
-    public Product(String id, int price, String description, String vendor, int prototype, int amount) {
-        super(id, price, description, vendor);
+    public Product(String id, int price, String name, String vendor, int prototype, int amount) {
+        super(id, price, name, vendor);
         this.prototype = prototype;
         this.amount = amount;
     }

@@ -128,9 +128,9 @@ public class Facade {
         }
     }
 
-    public String createProductPrototype(String id, int price, String description, String vendor)
+    public String createProductPrototype(String id, int price, String name, String vendor)
             throws ObjectAlreadyExistsException, InvalidInputException {
-        productPrototypeManager.add(new ProductPrototype(id, price, description, vendor));
+        productPrototypeManager.add(new ProductPrototype(id, price, name, vendor));
         return id;
     }
 
@@ -138,14 +138,14 @@ public class Facade {
         return productPrototypeManager.get(id);
     }
 
-    public void updateProductPrototype(String id, int price, String description, String vendor)
+    public void updateProductPrototype(String id, int price, String name, String vendor)
             throws ObjectNotFoundException, InvalidInputException {
         ProductPrototype productPrototype = this.getProductPrototype(id);
 
-        productPrototypeManager.validate(price, description, vendor);
+        productPrototypeManager.validate(price, name, vendor);
 
         productPrototype.setPrice(price);
-        productPrototype.setDescription(description);
+        productPrototype.setName(name);
         productPrototype.setVendor(vendor);
     }
 

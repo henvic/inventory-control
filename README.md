@@ -8,7 +8,7 @@ IF669 2013.2 UFPE
 Controle de estoque (entrada / saída de produtos).
 
 ## Entidades
-* ProductAbstract: id, price, (suggested), description, vendor
+* ProductAbstract: id, price (suggested), name, vendor
 * ProductPrototype: estende ProductPrototype
 * Product: estende ProductAbstract + armazena propriedade de referência p/ id de ProductPrototype no atributo prototype
 * Order: id, Product[], date, state (aberto, fechado), amount, seller (id do Actor), buyer (id da Actor)
