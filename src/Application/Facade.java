@@ -127,7 +127,7 @@ public class Facade {
     }
 
     public String createProductPrototype(String id, int price, String description, String vendor)
-            throws ObjectAlreadyExistsException {
+            throws ObjectAlreadyExistsException, MissingRolesException, InvalidInputException {
         productPrototypeManager.add(new ProductPrototype(id, price, description, vendor));
         return id;
     }

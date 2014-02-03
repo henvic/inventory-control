@@ -11,7 +11,24 @@ public class ProductPrototypeManager {
         this.repo = repo;
     }
 
-    public void add(ProductPrototype item) throws ObjectAlreadyExistsException {
+    public void validate(ProductAbstract product) throws MissingRolesException, InvalidInputException {
+       if (product.getPrice() < 0) {
+            throw new InvalidInputException("price < 0");
+        }
+
+        if (product.getDescription() == null) {
+            throw new InvalidInputException("description");
+        }
+
+        if (product.getVendor().length() < 1) {
+            throw new InvalidInputException("vendor");
+        }
+    }
+
+    public void add(ProductPrototype item)
+            throws ObjectAlreadyExistsException, MissingRolesException, InvalidInputException {
+        this.validate(item);
+
         if (repo.has(item.getId())) {
             throw new ObjectAlreadyExistsException();
         }
