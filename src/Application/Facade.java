@@ -22,13 +22,10 @@ public class Facade {
     }
 
     public String createActor(String name, String company, String email, String phone, String address,
-                              boolean buyer, boolean seller) throws MissingRolesException {
+                              boolean buyer, boolean seller)
+            throws MissingRolesException, InvalidInputException {
         String id = this.getUUID(ACTOR);
         Actor actor;
-
-        if (!buyer && !seller) {
-            throw new MissingRolesException();
-        }
 
         actor = new Actor(id, name, company, email, phone, address, buyer, seller);
 
@@ -70,7 +67,8 @@ public class Facade {
     }
 
     public void updateActor(String id, String name, String company, String email, String phone, String address,
-                             boolean buyer, boolean seller) throws ObjectNotFoundException {
+                             boolean buyer, boolean seller)
+            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
         Actor actor = this.getActor(id);
 
         try {
