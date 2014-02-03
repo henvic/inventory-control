@@ -149,6 +149,10 @@ public class Facade {
         productPrototype.setVendor(vendor);
     }
 
+    public void removeProductPrototype(String id) throws ObjectNotFoundException {
+        productPrototypeManager.remove(id);
+    }
+
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
         buyerManager = new BuyerManager(new ActorRepoArray());
