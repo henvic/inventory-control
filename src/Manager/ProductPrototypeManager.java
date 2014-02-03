@@ -11,22 +11,26 @@ public class ProductPrototypeManager {
         this.repo = repo;
     }
 
-    public void validate(ProductAbstract product) throws MissingRolesException, InvalidInputException {
-       if (product.getPrice() < 0) {
+    public void validate(int price, String description, String vendor) throws InvalidInputException {
+        if (price < 0) {
             throw new InvalidInputException("price < 0");
         }
 
-        if (product.getDescription() == null) {
+        if (description == null) {
             throw new InvalidInputException("description");
         }
 
-        if (product.getVendor().length() < 1) {
+        if (vendor.length() < 1) {
             throw new InvalidInputException("vendor");
         }
     }
 
+    public void validate(ProductAbstract product) throws InvalidInputException {
+        this.validate(product.getPrice(), product.getDescription(), product.getVendor());
+    }
+
     public void add(ProductPrototype item)
-            throws ObjectAlreadyExistsException, MissingRolesException, InvalidInputException {
+            throws ObjectAlreadyExistsException, InvalidInputException {
         this.validate(item);
 
         if (repo.has(item.getId())) {
