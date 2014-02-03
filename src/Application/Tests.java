@@ -4,14 +4,20 @@ import Entities.*;
 import Exceptions.*;
 
 public class Tests {
+    private String providerPrototypeProductId = "B00CO8TBQ0";
+
     private Facade facade;
 
     private void test(boolean result, String what) {
-        System.out.println(what + " = " + ((result) ? " ok" : " failed"));
+        System.out.println(what + " = " + ((result) ? "ok" : "failed"));
     }
 
-    //actor
-    private boolean cantCreateMockActor() {
+    private void test(Object result, String what) {
+        test((result != null), what);
+    }
+
+    //actor tests
+    private boolean cantCreateMockActorWithNoRole() {
         try {
             facade.createActor("Joseph",
                     "",
@@ -20,47 +26,34 @@ public class Tests {
                     "5th Ave, 140 NYC",
                     false,
                     false);
-            return true;
         } catch (MissingRolesException ignore) {
-            System.out.println("buyer & seller == false");
-        } catch (InvalidInputException e) {
-            System.out.println("field failed: " + e.getMessage());
+            return true;
+        } catch (InvalidInputException ignore) {
         }
 
         return false;
     }
 
     private String createMockActor() {
-        String id;
-
         try {
-            id = facade.createActor("Joseph",
+            return facade.createActor("Joseph",
                     "",
                     "foo@example.com",
                     "+55114141414",
                     "5th Ave, 140 NYC",
                     true,
                     false);
-            System.out.println("Ator criado com ID = " + id);
-
-            return id;
         } catch (MissingRolesException ignore) {
-        } catch (InvalidInputException e) {
-            System.out.println("field failed: " + e.getMessage());
+        } catch (InvalidInputException ignore) {
         }
 
         return null;
     }
 
     private Actor readMockActor(String id) {
-        Actor actor;
-
         try {
-            actor = facade.getActor(id);
-            System.out.println(actor);
-            return actor;
+            return facade.getActor(id);
         } catch (ObjectNotFoundException ignore) {
-            System.out.println("Ator não encontrado.");
         }
 
         return null;
@@ -83,39 +76,35 @@ public class Tests {
             facade.removeActor(id);
             return true;
         } catch (ObjectNotFoundException ignore) {
-            return false;
         }
+
+        return false;
     }
 
-    //product prototype
-    private boolean cantCreateProductPrototype() {
+    //product prototype tests
+    private boolean cantCreateProductPrototypeThatExists() {
         try {
-            facade.createProductPrototype("B00CO8TBQ0",
+            facade.createProductPrototype(this.providerPrototypeProductId,
                     32000,
                     "Intel Core i7-4770K Quad-Core 3.5 GHZ 8 MB Cache BX80646I74770K",
                     "Intel");
-            return false;
         } catch (ObjectAlreadyExistsException ignore) {
-            System.out.println("product prototype already exists");
             return true;
         } catch (InvalidInputException ignore) {
-            System.out.println("not expected post prototype invalid input");
-            return false;
         }
+
+        return false;
     }
 
     private String createMockProductPrototype() {
         try {
-            String id = facade.createProductPrototype("B001G5ZTLS", 10000, "Canon 5D Mark IV", "BH Photovideo");
-            System.out.println("Protótipo de produto criado com ID = " + id);
-            return id;
+            return facade.createProductPrototype(this.providerPrototypeProductId, 10000,
+                    "Canon 5D Mark IV", "BH Photovideo");
         } catch (ObjectAlreadyExistsException ignore) {
-            System.out.println("Error: ProductPrototype already exists.");
-            return null;
-        } catch (InvalidInputException e) {
-            System.out.println("field failed: " + e.getMessage());
-            return null;
+        } catch (InvalidInputException ignore) {
         }
+
+        return null;
     }
 
 
@@ -131,14 +120,9 @@ public class Tests {
     }
 
     private ProductPrototype readMockProductPrototype(String id) {
-        ProductPrototype productPrototype;
-
         try {
-            productPrototype = facade.getProductPrototype(id);
-            System.out.println(productPrototype);
-            return productPrototype;
+            return facade.getProductPrototype(id);
         } catch (ObjectNotFoundException ignore) {
-            System.out.println("ProductPrototype not found.");
         }
 
         return null;
@@ -149,29 +133,33 @@ public class Tests {
             facade.removeProductPrototype(id);
             return true;
         } catch (ObjectNotFoundException ignore) {
-            return false;
         }
+
+        return false;
     }
 
     public void run() {
         String temp;
-        System.out.println("inventory-control");
+        System.out.println("inventory-control tests");
 
-        //test all crud operations
-
-        //CRUD for actor
-        this.cantCreateMockActor();
+        // CRUD for actor
+        this.cantCreateMockActorWithNoRole();
         temp = this.createMockActor();
         this.updateMockActor(temp);
         this.readMockActor(temp);
-        test(this.removeMockActor(temp), "removeMockActor");
+        this.test(this.removeMockActor(temp), "removeMockActor");
 
-        //CRUD for productPrototype
-        this.cantCreateProductPrototype();
+        // CRUD for productPrototype
         temp = this.createMockProductPrototype();
-        this.updateMockProductPrototype(temp);
-        this.readMockProductPrototype(temp);
-        test(this.removeMockProductPrototype(temp), "removeMockProductPrototype");
+        this.test(temp, "createMockProductPrototype");
+        this.test(this.cantCreateProductPrototypeThatExists(), "cantCreateProductPrototypeThatExists");
+        this.test(this.updateMockProductPrototype(temp), "updateMockProductPrototype");
+        this.test(this.readMockProductPrototype(temp), "readMockProductPrototype");
+        this.test(this.removeMockProductPrototype(temp), "removeMockProductPrototype");
+
+        // CRUD for product
+
+        // CRUD for order
     }
 
     public Tests(Facade facade) {
