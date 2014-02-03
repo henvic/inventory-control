@@ -138,6 +138,17 @@ public class Facade {
         return productPrototypeManager.get(id);
     }
 
+    public void updateProductPrototype(String id, int price, String description, String vendor)
+            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+        ProductPrototype productPrototype = this.getProductPrototype(id);
+
+        productPrototypeManager.validate(price, description, vendor);
+
+        productPrototype.setPrice(price);
+        productPrototype.setDescription(description);
+        productPrototype.setVendor(vendor);
+    }
+
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
         buyerManager = new BuyerManager(new ActorRepoArray());
