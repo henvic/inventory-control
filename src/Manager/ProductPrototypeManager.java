@@ -52,6 +52,14 @@ public class ProductPrototypeManager {
         return productPrototype;
     }
 
+    public void update(String id)
+            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+        ProductPrototype productPrototype = this.get(id);
+
+        this.validate(productPrototype);
+
+    }
+
     public void remove(String id) throws ObjectNotFoundException {
         boolean removed = repo.remove(id);
 
