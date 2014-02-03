@@ -78,7 +78,7 @@ public class Tests {
         return false;
     }
 
-    public boolean removeMockActor(String id) {
+    private boolean removeMockActor(String id) {
         try {
             facade.removeActor(id);
             return true;
@@ -88,7 +88,7 @@ public class Tests {
     }
 
     //product prototype
-    public boolean cantCreateProductPrototype() {
+    private boolean cantCreateProductPrototype() {
         try {
             facade.createProductPrototype("B00CO8TBQ0",
                     32000,
@@ -119,7 +119,7 @@ public class Tests {
     }
 
 
-    public boolean updateMockProductPrototype(String id) {
+    private boolean updateMockProductPrototype(String id) {
         try {
             facade.updateProductPrototype(id, 4000, "Canon 5D Mark IV", "Adorama");
             return true;
