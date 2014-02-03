@@ -71,12 +71,11 @@ public class Tests {
             facade.updateActor(id, "John", "PB", "foo@example.net", "1-414-141-444", "K 140, D.C.", true, false);
             return true;
         } catch (ObjectNotFoundException ignore) {
-            return false;
         } catch (MissingRolesException ignore) {
-            return false;
         } catch (InvalidInputException ignore) {
-            return false;
         }
+
+        return false;
     }
 
     public boolean removeMockActor(String id) {
