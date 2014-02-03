@@ -45,11 +45,35 @@ public class Actor extends Item {
         return address;
     }
 
-    public Actor() {
-        address = new Address();
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public boolean isBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(boolean buyer) {
+        this.buyer = buyer;
+    }
+
+    public boolean isSeller() {
+        return seller;
+    }
+
+    public void setSeller(boolean seller) {
+        this.seller = seller;
+    }
+
+    public Actor(String id, String name, String company, String email, String phone, String address,
+                 boolean buyer, boolean seller) {
+        super(id);
+        this.name = name;
+        this.company = company;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.buyer = buyer;
+        this.seller = seller;
     }
 }
