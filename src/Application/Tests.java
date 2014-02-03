@@ -99,6 +99,11 @@ public class Tests {
         } catch (ObjectAlreadyExistsException ignore) {
             System.out.println("product prototype already exists");
             return true;
+        } catch (InvalidInputException ignore) {
+            System.out.println("not expected post prototype invalid input");
+            return false;
+        }
+    }
 
     private String createMockProductPrototype() {
         try {
