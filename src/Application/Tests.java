@@ -130,6 +130,20 @@ public class Tests {
         return false;
     }
 
+    private ProductPrototype readMockProductPrototype(String id) {
+        ProductPrototype productPrototype;
+
+        try {
+            productPrototype = facade.getProductPrototype(id);
+            System.out.println(productPrototype);
+            return productPrototype;
+        } catch (ObjectNotFoundException ignore) {
+            System.out.println("ProductPrototype not found.");
+        }
+
+        return null;
+    }
+
     public void run() {
         String temp;
         System.out.println("inventory-control");
