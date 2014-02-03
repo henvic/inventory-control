@@ -6,14 +6,6 @@ import Exceptions.*;
 public class Tests {
     private Facade facade;
 
-    private String createMockProductPrototype() {
-        try {
-            String id = facade.createProductPrototype("B001G5ZTLS", 10000, "Canon 5D Mark IV", "BH Photovideo");
-            System.out.println("Protótipo de produto criado com ID = " + id);
-            return id;
-        } catch (ObjectAlreadyExistsException ignore) {
-            return null;
-        }
     }
 
     private boolean cantCreateMockActor() {
@@ -103,6 +95,18 @@ public class Tests {
         } catch (ObjectAlreadyExistsException ignore) {
             System.out.println("product prototype already exists");
             return true;
+
+    private String createMockProductPrototype() {
+        try {
+            String id = facade.createProductPrototype("B001G5ZTLS", 10000, "Canon 5D Mark IV", "BH Photovideo");
+            System.out.println("Protótipo de produto criado com ID = " + id);
+            return id;
+        } catch (ObjectAlreadyExistsException ignore) {
+            System.out.println("Error: ProductPrototype already exists.");
+            return null;
+        } catch (InvalidInputException e) {
+            System.out.println("field failed: " + e.getMessage());
+            return null;
         }
     }
 
