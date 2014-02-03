@@ -164,7 +164,7 @@ public class Tests {
         temp = this.createMockActor();
         this.updateMockActor(temp);
         this.readMockActor(temp);
-        this.removeMockActor(temp);
+        test(this.removeMockActor(temp), "removeMockActor");
 
         //CRUD for productPrototype
         this.cantCreateProductPrototype();
