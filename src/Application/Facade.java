@@ -139,7 +139,7 @@ public class Facade {
     }
 
     public void updateProductPrototype(String id, int price, String description, String vendor)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+            throws ObjectNotFoundException, InvalidInputException {
         ProductPrototype productPrototype = this.getProductPrototype(id);
 
         productPrototypeManager.validate(price, description, vendor);
