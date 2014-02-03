@@ -144,6 +144,15 @@ public class Tests {
         return null;
     }
 
+    private boolean removeMockProductPrototype(String id) {
+        try {
+            facade.removeProductPrototype(id);
+            return true;
+        } catch (ObjectNotFoundException ignore) {
+            return false;
+        }
+    }
+
     public void run() {
         String temp;
         System.out.println("inventory-control");
