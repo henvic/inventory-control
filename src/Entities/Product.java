@@ -20,6 +20,14 @@ public class Product extends ProductAbstract {
         this.amount = amount;
     }
 
+    public void increaseAmount(int diff) {
+        this.setAmount(this.amount + diff);
+    }
+
+    public void decreaseAmount(int diff) {
+        this.increaseAmount(- diff);
+    }
+
     public Product(String id, int price, String description, String vendor, int prototype, int amount) {
         super(id, price, description, vendor);
         this.prototype = prototype;
