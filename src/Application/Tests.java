@@ -170,6 +170,8 @@ public class Tests {
         this.cantCreateProductPrototype();
         temp = this.createMockProductPrototype();
         this.updateMockProductPrototype(temp);
+        this.readMockProductPrototype(temp);
+        test(this.removeMockProductPrototype(temp), "removeMockProductPrototype");
     }
 
     public Tests(Facade facade) {
