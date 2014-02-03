@@ -3,7 +3,7 @@ package Application;
 import Entities.*;
 import Exceptions.*;
 
-public class Cli {
+public class Tests {
     private Facade facade;
 
     private String createMockProductPrototype() {
@@ -113,13 +113,13 @@ public class Cli {
         //test createProductPrototype
     }
 
-    public Cli (Facade facade) {
+    public Tests(Facade facade) {
         this.facade = facade;
     }
 
     public static void main (String[] args) {
         try {
-            new Cli(new Facade()).run();
+            new Tests(new Facade()).run();
         } catch (Exception e) {
             System.err.println("Ocorreu um erro inesperado no sistema.\n" +
                     "É possível que o sistema esteja em um estado inconsistente.\n");
