@@ -90,6 +90,8 @@ public class Facade {
         } catch (ObjectAlreadyExistsException ignore) { // can safely ignore
         }
 
+        buyerManager.validate(name, company, email, phone, address, buyer, seller);
+
         actor.setName(name);
         actor.setCompany(company);
         actor.setEmail(email);
