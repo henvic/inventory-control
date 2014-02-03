@@ -14,6 +14,7 @@ public class Facade {
     private final char PRODUCT = 'P';
 
     private ProductPrototypeManager productPrototypeManager;
+    private ActorManager actorManager;
     private BuyerManager buyerManager;
     private SellerManager sellerManager;
 
@@ -90,7 +91,7 @@ public class Facade {
         } catch (ObjectAlreadyExistsException ignore) { // can safely ignore
         }
 
-        buyerManager.validate(name, company, email, phone, address, buyer, seller);
+        actorManager.validate(name, company, email, phone, address, buyer, seller);
 
         actor.setName(name);
         actor.setCompany(company);
@@ -155,6 +156,7 @@ public class Facade {
 
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
+        actorManager = new ActorManager(new ActorRepoArray()); // just to avoid using static methods
         buyerManager = new BuyerManager(new ActorRepoArray());
         sellerManager = new SellerManager(new ActorRepoArray());
     }

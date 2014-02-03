@@ -4,7 +4,7 @@ import Entities.*;
 import Exceptions.*;
 import Repos.Array.*;
 
-abstract public class ActorManager {
+public class ActorManager {
     private ActorRepoArray repo;
 
     public ActorManager(ActorRepoArray repo) {
