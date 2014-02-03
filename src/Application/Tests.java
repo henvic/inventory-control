@@ -16,7 +16,7 @@ public class Tests {
         }
     }
 
-    private void cantCreateMockActor() {
+    private boolean cantCreateMockActor() {
         try {
             facade.createActor("Joseph",
                     "",
@@ -25,9 +25,14 @@ public class Tests {
                     "5th Ave, 140 NYC",
                     false,
                     false);
+            return true;
         } catch (MissingRolesException ignore) {
             System.out.println("buyer & seller == false");
+        } catch (InvalidInputException e) {
+            System.out.println("field failed: " + e.getMessage());
         }
+
+        return false;
     }
 
     private String createMockActor() {
@@ -45,6 +50,8 @@ public class Tests {
 
             return id;
         } catch (MissingRolesException ignore) {
+        } catch (InvalidInputException e) {
+            System.out.println("field failed: " + e.getMessage());
         }
 
         return null;
@@ -69,6 +76,10 @@ public class Tests {
             facade.updateActor(id, "John", "PB", "foo@example.net", "1-414-141-444", "K 140, D.C.", true, false);
             return true;
         } catch (ObjectNotFoundException ignore) {
+            return false;
+        } catch (MissingRolesException ignore) {
+            return false;
+        } catch (InvalidInputException ignore) {
             return false;
         }
     }
@@ -106,6 +117,7 @@ public class Tests {
         temp = this.createMockActor();
         this.updateMockActor(temp);
         this.readMockActor(temp);
+        this.removeMockActor(temp);
 
         //CRUD for productPrototype
         this.cantCreateProductPrototype();
