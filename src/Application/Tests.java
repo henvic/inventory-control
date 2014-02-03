@@ -106,7 +106,7 @@ public class Tests {
         }
     }
 
-    public void run () {
+    public void run() {
         String temp;
         System.out.println("inventory-control");
 
