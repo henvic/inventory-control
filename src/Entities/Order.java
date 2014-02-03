@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Order extends Item {
     private int timestamp;
-    private boolean open;
+    private boolean open = true;
     private int seller;
     private int buyer;
     private int amount;
     private ArrayList<Product> products;
 
-    public Order() {
-        this.open = true;
+    public Order(String id) {
+        super(id);
     }
 
     public int getTimestamp() {
