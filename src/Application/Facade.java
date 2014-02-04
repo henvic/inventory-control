@@ -14,6 +14,7 @@ public class Facade {
     private final char PRODUCT = 'P';
 
     private ProductPrototypeManager productPrototypeManager;
+    private ProductManager productManager;
     private ActorManager actorManager;
     private BuyerManager buyerManager;
     private SellerManager sellerManager;
@@ -158,6 +159,7 @@ public class Facade {
 
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
+        productManager = new ProductManager(new ProductRepoArray());
         actorManager = new ActorManager(new ActorRepoArray()); // just to avoid using static methods
         buyerManager = new BuyerManager(new ActorRepoArray());
         sellerManager = new SellerManager(new ActorRepoArray());
