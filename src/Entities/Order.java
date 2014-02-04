@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Order extends Item {
     private int timestamp;
     private boolean open = true;
-    private int seller;
-    private int buyer;
+    private String buyer;
+    private String seller;
     private int amount;
     private ArrayList<Product> products;
 
@@ -30,20 +30,20 @@ public class Order extends Item {
         this.open = open;
     }
 
-    public int getSeller() {
-        return seller;
-    }
-
-    public void setSeller(int seller) {
-        this.seller = seller;
-    }
-
-    public int getBuyer() {
+    public String getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(int buyer) {
+    public void setBuyer(String buyer) {
         this.buyer = buyer;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
     }
 
     public int getAmount() {
