@@ -61,4 +61,13 @@ public class Order extends Item {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+
+    public Order(String id, int timestamp, boolean open, String buyer, String seller) {
+        super(id);
+        this.timestamp = timestamp;
+        this.open = open;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.amount = 0;
+    }
 }
