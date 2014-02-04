@@ -157,6 +157,37 @@ public class Facade {
         productPrototypeManager.remove(id);
     }
 
+    public String createProduct(ProductPrototype productPrototype, int amount)
+            throws ObjectAlreadyExistsException, InvalidInputException {
+        int price = productPrototype.getPrice();
+        String prototype = productPrototype.getId();
+        String name = productPrototype.getName();
+        String vendor = productPrototype.getVendor();
+        String id = this.getUUID(PRODUCT);
+        productManager.add(new Product(id, price, name, vendor, prototype, amount));
+        return id;
+    }
+
+    public Product getProduct(String id) throws ObjectNotFoundException {
+        return productManager.get(id);
+    }
+
+    public void updateProduct(String id, int price, String name, String vendor, int amount)
+            throws ObjectNotFoundException, InvalidInputException {
+        Product product = this.getProduct(id);
+
+        productManager.validate(price, name, vendor, amount);
+
+        product.setAmount(amount);
+        product.setPrice(price);
+        product.setName(name);
+        product.setVendor(vendor);
+    }
+
+    public void removeProduct(String id) throws ObjectNotFoundException {
+        productManager.remove(id);
+    }
+
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
         productManager = new ProductManager(new ProductRepoArray());
