@@ -12,7 +12,6 @@ public class ActorTests implements Tests {
 
     public boolean cantCreateMockActorWithNoRole() {
         try {
-            System.out.println("SKMADKMDASKMDSAKMMKDSA");
             facade.createActor("Joseph",
                     "",
                     "foo@example.com",
@@ -20,7 +19,6 @@ public class ActorTests implements Tests {
                     "5th Ave, 140 NYC",
                     false,
                     false);
-            System.out.println("SKMADKMDASKMDSAKMMKDSA");
         } catch (MissingRolesException ignore) {
             return true;
         } catch (InvalidInputException ignore) {
