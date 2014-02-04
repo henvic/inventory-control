@@ -50,7 +50,7 @@ public class ProductTests implements Tests {
         return false;
     }
 
-    public void runAll() {
+    public void runSuite() {
         String temp;
 
         temp = this.createMockProduct(new ProductPrototype("foo", 4000, "60D", "Canon"));

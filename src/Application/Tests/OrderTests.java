@@ -10,7 +10,7 @@ public class OrderTests implements Tests {
     private Facade facade;
     private TestRunner testRunner;
 
-    public void runAll() {
+    public void runSuite() {
         // @todo add missing tests
     }
 

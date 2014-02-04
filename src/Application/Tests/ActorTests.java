@@ -74,7 +74,7 @@ public class ActorTests implements Tests {
         return false;
     }
 
-    public void runAll() {
+    public void runSuite() {
         String temp;
 
         // @todo add missing tests

@@ -25,10 +25,10 @@ public class TestRunner {
         try {
             System.out.println("Running the inventory-control tests");
 
-            new ActorTests(facade, this).runAll();
-            new ProductPrototypeTests(facade, this).runAll();
-            new ProductTests(facade, this).runAll();
-            new OrderTests(facade, this).runAll();
+            new ActorTests(facade, this).runSuite();
+            new ProductPrototypeTests(facade, this).runSuite();
+            new ProductTests(facade, this).runSuite();
+            new OrderTests(facade, this).runSuite();
 
             System.out.print("\nTotal: " + this.total + "; Passing: " + (this.total - this.errors) +
                     "; Failing: " + this.errors + ";");
