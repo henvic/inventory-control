@@ -1,14 +1,14 @@
 package Entities;
 
 public class Product extends ProductAbstract {
-    private int prototype;
+    private String prototype;
     private int amount;
 
-    public int getPrototype() {
+    public String getPrototype() {
         return prototype;
     }
 
-    public void setPrototype(int prototype) {
+    public void setPrototype(String prototype) {
         this.prototype = prototype;
     }
 
@@ -28,7 +28,7 @@ public class Product extends ProductAbstract {
         this.increaseAmount(- diff);
     }
 
-    public Product(String id, int price, String name, String vendor, int prototype, int amount) {
+    public Product(String id, int price, String name, String vendor, String prototype, int amount) {
         super(id, price, name, vendor);
         this.prototype = prototype;
         this.amount = amount;
