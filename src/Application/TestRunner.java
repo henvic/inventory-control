@@ -1,6 +1,7 @@
 package Application;
 
 import Application.Tests.*;
+import Entities.ProductPrototype;
 
 public class TestRunner {
     private ProductPrototypeTests productPrototypeTests;
@@ -39,9 +40,8 @@ public class TestRunner {
 
         // CRUD for product
         //@todo add missing tests
-        temp = productTests.createMockProduct();
+        temp = productTests.createMockProduct(new ProductPrototype("foo", 4000, "60D", "Canon"));
         this.test(temp, "createMockProduct");
-        this.test(productTests.cantCreateProductThatExists(), "cantCreateProductThatExists");
         this.test(productTests.updateMockProduct(temp), "updateMockProduct");
         this.test(productTests.readMockProduct(temp), "readMockProduct");
         this.test(productTests.removeMockProduct(temp), "removeMockProduct");
