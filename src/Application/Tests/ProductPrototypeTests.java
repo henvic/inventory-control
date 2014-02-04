@@ -1,11 +1,13 @@
 package Application.Tests;
 
-import Entities.*;
 import Application.Facade;
+import Application.TestRunner;
+import Entities.*;
 import Exceptions.*;
 
 public class ProductPrototypeTests {
     private Facade facade;
+    private TestRunner testRunner;
 
     private String providerPrototypeProductId = "B00CO8TBQ0";
 
@@ -65,7 +67,20 @@ public class ProductPrototypeTests {
         return false;
     }
 
-    public ProductPrototypeTests(Facade facade) {
+    public void runAll() {
+        String temp;
+
+        //@todo add missing tests
+        temp = this.createMockProductPrototype();
+        testRunner.test(temp, "createMockProductPrototype");
+        testRunner.test(this.cantCreateProductPrototypeThatExists(), "cantCreateProductPrototypeThatExists");
+        testRunner.test(this.updateMockProductPrototype(temp), "updateMockProductPrototype");
+        testRunner.test(this.readMockProductPrototype(temp), "readMockProductPrototype");
+        testRunner.test(this.removeMockProductPrototype(temp), "removeMockProductPrototype");
+    }
+
+    public ProductPrototypeTests(Facade facade, TestRunner testRunner) {
         this.facade = facade;
+        this.testRunner = testRunner;
     }
 }

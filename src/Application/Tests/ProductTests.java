@@ -1,11 +1,13 @@
 package Application.Tests;
 
-import Entities.*;
 import Application.Facade;
+import Application.TestRunner;
+import Entities.*;
 import Exceptions.*;
 
 public class ProductTests {
     private Facade facade;
+    private TestRunner testRunner;
 
     public String createMockProduct(ProductPrototype productPrototype) {
         try {
@@ -47,7 +49,18 @@ public class ProductTests {
         return false;
     }
 
-    public ProductTests(Facade facade) {
+    public void runAll() {
+        String temp;
+
+        temp = this.createMockProduct(new ProductPrototype("foo", 4000, "60D", "Canon"));
+        testRunner.test(temp, "createMockProduct");
+        testRunner.test(this.updateMockProduct(temp), "updateMockProduct");
+        testRunner.test(this.readMockProduct(temp), "readMockProduct");
+        testRunner.test(this.removeMockProduct(temp), "removeMockProduct");
+    }
+
+    public ProductTests(Facade facade, TestRunner testRunner) {
         this.facade = facade;
+        this.testRunner = testRunner;
     }
 }

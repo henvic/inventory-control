@@ -1,11 +1,13 @@
 package Application.Tests;
 
 import Application.Facade;
+import Application.TestRunner;
 import Entities.*;
 import Exceptions.*;
 
 public class ActorTests {
     private Facade facade;
+    private TestRunner testRunner;
 
     public boolean cantCreateMockActorWithNoRole() {
         try {
@@ -73,7 +75,20 @@ public class ActorTests {
         return false;
     }
 
-    public ActorTests(Facade facade) {
+    public void runAll() {
+        String temp;
+
+        // @todo add missing tests
+        testRunner.test(this.cantCreateMockActorWithNoRole(), "cantCreateMockActorWithNoRole");
+        temp = this.createMockActor();
+        testRunner.test(temp, "createMockActor");
+        testRunner.test(this.updateMockActor(temp), "updateMockActor");
+        testRunner.test(this.readMockActor(temp), "readMockActor");
+        testRunner.test(this.removeMockActor(temp), "removeMockActor");
+    }
+
+    public ActorTests(Facade facade, TestRunner testRunner) {
         this.facade = facade;
+        this.testRunner = testRunner;
     }
 }
