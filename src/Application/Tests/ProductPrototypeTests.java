@@ -4,8 +4,9 @@ import Application.Facade;
 import Application.TestRunner;
 import Entities.*;
 import Exceptions.*;
+import Interfaces.*;
 
-public class ProductPrototypeTests {
+public class ProductPrototypeTests implements Tests {
     private Facade facade;
     private TestRunner testRunner;
 
