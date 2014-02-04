@@ -8,14 +8,12 @@ public class TestRunner {
     private ActorTests actorTests;
 
     private void test(boolean result, String what) {
-        System.out.println(what + " = " + ((result) ? "ok" : "failed"));
+        System.out.println(what + ": " + ((result) ? "pass" : "fail"));
     }
 
     private void test(Object result, String what) {
         test((result != null), what);
     }
-
-    // order tests
 
     public void run() {
         String temp;
