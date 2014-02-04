@@ -1,5 +1,6 @@
 package Application.Tests;
 
+import Entities.*;
 import Application.Facade;
 import Exceptions.*;
 
@@ -45,7 +46,7 @@ public class ProductPrototypeTests {
         return false;
     }
 
-    public Entities.ProductPrototype readMockProductPrototype(String id) {
+    public ProductPrototype readMockProductPrototype(String id) {
         try {
             return facade.getProductPrototype(id);
         } catch (ObjectNotFoundException ignore) {
