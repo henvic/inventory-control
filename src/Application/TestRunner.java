@@ -6,15 +6,20 @@ public class TestRunner {
     private Facade facade;
     private int errors = 0;
     private int total = 0;
+    private String graph = "";
 
     public void test(boolean result, String what) {
         this.total += 1;
 
-        if (!result) {
-            this.errors += 1;
+        if (result) {
+            this.graph += ".";
+            System.out.println(what + ": pass");
+            return;
         }
 
-        System.out.println(what + ": " + ((result) ? "pass" : "fail"));
+        this.errors += 1;
+        this.graph += "x";
+        System.out.println(what + ": fail");
     }
 
     public void test(Object result, String what) {
@@ -30,9 +35,13 @@ public class TestRunner {
             new ProductTests(facade, this).runSuite();
             new OrderTests(facade, this).runSuite();
 
-            System.out.print("\nTotal: " + this.total + "; Passing: " + (this.total - this.errors) +
-                    "; Failing: " + this.errors + ";");
-            System.out.println((this.errors == 0) ? " Perfect!" : "");
+            System.out.println("\n" + this.graph + "\n" +
+                    "Total: " + this.total + "; Passing: " + (this.total - this.errors) + "; " +
+                    "Failing: " + this.errors + ";");
+
+            if (this.errors != 0) {
+                System.exit(1);
+            }
         } catch (Exception e) {
             System.err.println("Ocorreu um erro inesperado no sistema.\n" +
                     "É possível que o sistema esteja em um estado inconsistente.\n");
