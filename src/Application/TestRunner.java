@@ -44,8 +44,7 @@ public class TestRunner {
             }
         } catch (Exception e) {
             System.err.println("Ocorreu um erro inesperado no sistema.\n" +
-                    "É possível que o sistema esteja em um estado inconsistente.\n");
-            System.err.println(e);
+                    "É possível que o sistema esteja em um estado inconsistente.\n\n" + e);
         }
     }
 
