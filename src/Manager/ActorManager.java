@@ -24,7 +24,7 @@ public class ActorManager {
             throw new InvalidInputException("company");
         }
 
-        if (!email.matches(emailPattern)) {
+        if (email.length() != 0 && !email.matches(emailPattern)) {
             throw new InvalidInputException("email");
         }
 
