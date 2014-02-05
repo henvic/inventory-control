@@ -11,9 +11,13 @@ public class ProductPrototypeManager {
         this.repo = repo;
     }
 
-    public void validate(int price, String name, String vendor) throws InvalidInputException {
+    public void validate(int price, int amount, String name, String vendor) throws InvalidInputException {
         if (price < 0) {
             throw new InvalidInputException("price < 0");
+        }
+
+        if (amount < 0) {
+            throw new InvalidInputException("amount < 0");
         }
 
         if (name == null) {
@@ -26,7 +30,7 @@ public class ProductPrototypeManager {
     }
 
     public void validate(ProductAbstract product) throws InvalidInputException {
-        this.validate(product.getPrice(), product.getName(), product.getVendor());
+        this.validate(product.getPrice(), product.getAmount(), product.getName(), product.getVendor());
     }
 
     public void add(ProductPrototype item)

@@ -53,7 +53,7 @@ public class ProductTests implements Tests {
     public void runSuite() {
         String temp;
 
-        temp = this.createMockProduct(new ProductPrototype("foo", 4000, "60D", "Canon"));
+        temp = this.createMockProduct(new ProductPrototype("foo", 4000, 100, "60D", "Canon"));
         testRunner.test(temp, "createMockProduct");
         testRunner.test(this.updateMockProduct(temp), "updateMockProduct");
         testRunner.test(this.readMockProduct(temp), "readMockProduct");
