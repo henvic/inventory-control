@@ -60,6 +60,7 @@ public class Order extends Item {
 
     public Order(String id, String buyer, String seller) {
         super(id);
+        this.products = new ArrayList<Product>();
         this.open = true;
         this.buyer = buyer;
         this.seller = seller;
