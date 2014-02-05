@@ -62,10 +62,9 @@ public class Order extends Item {
         this.products = products;
     }
 
-    public Order(String id, int timestamp, boolean open, String buyer, String seller) {
+    public Order(String id, String buyer, String seller) {
         super(id);
-        this.timestamp = timestamp;
-        this.open = open;
+        this.open = true;
         this.buyer = buyer;
         this.seller = seller;
         this.amount = 0;
