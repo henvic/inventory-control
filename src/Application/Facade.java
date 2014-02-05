@@ -18,6 +18,7 @@ public class Facade {
     private ActorManager actorManager;
     private BuyerManager buyerManager;
     private SellerManager sellerManager;
+    private OrderManager orderManager;
 
     private String getUUID(char type) {
         return type + "-" + UUID.randomUUID().toString();
@@ -188,11 +189,48 @@ public class Facade {
         productManager.remove(id);
     }
 
+    public String createOrder(String buyer, String seller)
+            throws ObjectAlreadyExistsException, ObjectNotFoundException, InvalidInputException {
+        String id = getUUID(ORDER);
+
+        try {
+            this.buyerManager.get(buyer);
+        } catch (ObjectNotFoundException ignore) {
+            throw new InvalidInputException("buyer");
+        }
+
+        try {
+            this.sellerManager.get(seller);
+        } catch (ObjectNotFoundException ignore) {
+            throw new InvalidInputException("seller");
+        }
+
+        orderManager.add(new Order(id, buyer, seller));
+        return id;
+    }
+
+    public Order getOrder(String id) throws ObjectNotFoundException {
+        return orderManager.get(id);
+    }
+
+
+    public void closeOrder(String id) throws ObjectNotFoundException {
+        Order order = this.getOrder(id);
+
+        order.setOpen(false);
+        order.setTimestamp(((Long) System.currentTimeMillis()).intValue());
+    }
+
+    public void removeOrder(String id) throws ObjectNotFoundException {
+        orderManager.remove(id);
+    }
+
     public Facade() {
         productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
         productManager = new ProductManager(new ProductRepoArray());
         actorManager = new ActorManager(new ActorRepoArray()); // just to avoid using static methods
         buyerManager = new BuyerManager(new ActorRepoArray());
         sellerManager = new SellerManager(new ActorRepoArray());
+        orderManager = new OrderManager(new OrderRepoArray());
     }
 }
