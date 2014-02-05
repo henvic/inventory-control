@@ -63,6 +63,17 @@ public class OrderTests implements Tests {
         return false;
     }
 
+    public boolean getEmptyProductsArrayForMockOrder(String id) {
+        try {
+            if (facade.getProductsFromOrder(id).length == 0) {
+                return true;
+            }
+        } catch (ObjectNotFoundException ignore) {
+        }
+
+        return false;
+    }
+
     public void runSuite() {
         String temp;
 
@@ -70,6 +81,7 @@ public class OrderTests implements Tests {
         temp = this.createMockOrder();
         testRunner.test(temp, "createMockOrder");
         testRunner.test(readMockOrder(temp), "readMockOrder");
+        testRunner.test(getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
         testRunner.test(removeMockOrder(temp), "removeMockOrder");
     }
 

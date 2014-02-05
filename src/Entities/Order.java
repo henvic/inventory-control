@@ -54,8 +54,8 @@ public class Order extends Item {
         this.amount = amount;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public Product[] getProducts() {
+        return products.toArray(new Product[products.size()]);
     }
 
     public Order(String id, String buyer, String seller) {
