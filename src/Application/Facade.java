@@ -166,6 +166,7 @@ public class Facade {
         String name = productPrototype.getName();
         String vendor = productPrototype.getVendor();
         String id = this.getUUID(PRODUCT);
+
         productManager.add(new Product(id, price, name, vendor, prototype, amount));
         return id;
     }
@@ -214,6 +215,40 @@ public class Facade {
         return orderManager.get(id);
     }
 
+    public String addProductToOrder(String orderId, String productPrototypeId, int amount)
+            throws ObjectNotFoundException, MissingRolesException, InvalidInputException,
+            OrderAlreadyClosed, ObjectAlreadyExistsException {
+        Order order = this.getOrder(orderId);
+        ProductPrototype productPrototype = this.getProductPrototype(productPrototypeId);
+        Product product = null;
+
+        if (!order.isOpen()) {
+            throw new OrderAlreadyClosed();
+        }
+
+        //see if the product exists on the order already
+        for (Product each : this.getProductsFromOrder(orderId)) {
+            if (each.getPrototype().equalsIgnoreCase(productPrototypeId)) {
+                product = each;
+                break;
+            }
+        }
+
+        if (product == null) {
+            product = this.getProduct(this.createProduct(productPrototype, amount));
+        }
+
+        if (amount < 1 || amount > productPrototype.getAmount() - product.getAmount()) {
+            throw new InvalidInputException("Invalid amount");
+        }
+
+        order.addProduct(product);
+
+        return product.getId();
+    }
+    public Product[] getProductsFromOrder(String id) throws ObjectNotFoundException {
+        return orderManager.get(id).getProducts();
+    }
 
     public void closeOrder(String id) throws ObjectNotFoundException {
         Order order = this.getOrder(id);
