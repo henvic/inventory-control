@@ -58,10 +58,6 @@ public class Order extends Item {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
     public Order(String id, String buyer, String seller) {
         super(id);
         this.open = true;
