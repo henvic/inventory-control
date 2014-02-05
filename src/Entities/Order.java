@@ -58,6 +58,14 @@ public class Order extends Item {
         return products.toArray(new Product[products.size()]);
     }
 
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
     public Order(String id, String buyer, String seller) {
         super(id);
         this.products = new ArrayList<Product>();
