@@ -65,12 +65,14 @@ public class OrderManager {
         return Order;
     }
 
-    public void update(String id)
+    public void update(String id, String buyer, String seller)
             throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
-        Order Order = this.get(id);
+        Order order = this.get(id);
 
-        this.validate(Order);
+        this.validate(order);
 
+        order.setBuyer(buyer);
+        order.setSeller(seller);
     }
 
     public void remove(String id) throws ObjectNotFoundException {
