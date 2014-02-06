@@ -267,8 +267,24 @@ public class Facade {
         return orderManager.get(id).getProducts();
     }
 
-    public void closeOrder(String id) throws ObjectNotFoundException {
+    public void closeOrder(String id) throws ObjectNotFoundException, NotEnoughProductsExceptionOnStock {
+        Product[] products;
+        ProductPrototype productPrototype;
         Order order = this.getOrder(id);
+
+        products = order.getProducts();
+
+        //first, verify if there are enough products on the stock to make the order
+        for (Product each : products) {
+            if (this.getProductPrototype(each.getPrototype()).getAmount() < each.getAmount()) {
+                throw new NotEnoughProductsExceptionOnStock();
+            }
+        }
+
+        for (Product each : products) {
+            productPrototype = this.getProductPrototype(each.getPrototype());
+            productPrototype.setAmount(productPrototype.getAmount() - each.getAmount());
+        }
 
         order.setOpen(false);
         order.setTimestamp(((Long) System.currentTimeMillis()).intValue());
