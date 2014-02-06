@@ -33,7 +33,6 @@ public class OrderTests implements Tests {
                     false,
                     true);
         } catch (Exception ignore) {
-            System.out.println(ignore.getMessage());
             return null;
         }
 
@@ -89,7 +88,7 @@ public class OrderTests implements Tests {
         String productPrototypeId;
 
         try {
-            productPrototypeId = facade.createProductPrototype("order-foo",
+            productPrototypeId = facade.createProductPrototype(this.providerPrototypeProductId,
                     50000, 10, "prototype", "undefined");
             facade.addProductToOrder(id, productPrototypeId, 10);
             return true;
@@ -104,7 +103,6 @@ public class OrderTests implements Tests {
             facade.removeProductFromOrder(id, this.providerPrototypeProductId, 9);
             return true;
         } catch (Exception ignore) {
-            System.out.println(ignore);
         }
 
         return false;
