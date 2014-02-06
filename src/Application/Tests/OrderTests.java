@@ -10,6 +10,8 @@ public class OrderTests implements Tests {
     private Facade facade;
     private TestRunner testRunner;
 
+    private String providerPrototypeProductId = "order-foo";
+
     public String createMockOrder() {
         String buyer;
         String seller;
@@ -74,6 +76,31 @@ public class OrderTests implements Tests {
         return false;
     }
 
+    public boolean addProductToMockOrder(String id) {
+        String productPrototypeId;
+
+        try {
+            productPrototypeId = facade.createProductPrototype("order-foo",
+                    50000, 10, "prototype", "undefined");
+            facade.addProductToOrder(id, productPrototypeId, 10);
+            return true;
+        } catch (Exception ignore) {
+        }
+
+        return false;
+    }
+
+    public boolean removeProductFromMockOrder(String id) {
+        try {
+            facade.removeProductFromOrder(id, this.providerPrototypeProductId, 9);
+            return true;
+        } catch (Exception ignore) {
+            System.out.println(ignore);
+        }
+
+        return false;
+    }
+
     public void runSuite() {
         String temp;
 
@@ -82,6 +109,8 @@ public class OrderTests implements Tests {
         testRunner.test(temp, "createMockOrder");
         testRunner.test(readMockOrder(temp), "readMockOrder");
         testRunner.test(getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
+        testRunner.test(addProductToMockOrder(temp), "addProductToMockOrder");
+        testRunner.test(removeProductFromMockOrder(temp), "removeProductFromMockOrder");
         testRunner.test(removeMockOrder(temp), "removeMockOrder");
     }
 
