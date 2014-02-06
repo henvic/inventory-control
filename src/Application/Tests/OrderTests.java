@@ -44,6 +44,28 @@ public class OrderTests implements Tests {
         return null;
     }
 
+    public boolean updateMockOrder(String id) {
+        try {
+            Order order = facade.getOrder(id);
+            String seller = facade.createActor("Seller #3",
+                    "",
+                    "",
+                    "+55 88 8888-8888",
+                    "Cin, UFPE",
+                    false,
+                    true);
+
+            facade.updateOrder(id, order.getBuyer(), seller);
+
+            if (order.getSeller().equalsIgnoreCase(seller)) {
+                return true;
+            }
+        } catch (Exception ignore) {
+        }
+
+        return false;
+    }
+
     public boolean closeMockOrder(String id) {
         try {
             facade.closeOrder(id);
@@ -117,6 +139,7 @@ public class OrderTests implements Tests {
         testRunner.test(this.readMockOrder(temp), "readMockOrder");
         testRunner.test(this.getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
         testRunner.test(this.addProductToMockOrder(temp), "addProductToMockOrder");
+        testRunner.test(this.updateMockOrder(temp), "updateMockOrder");
         testRunner.test(this.removeProductFromMockOrder(temp), "removeProductFromMockOrder");
         testRunner.test(this.closeMockOrder(temp), "closeMockOrder");
         testRunner.test(this.removeMockOrder(temp), "removeMockOrder");
