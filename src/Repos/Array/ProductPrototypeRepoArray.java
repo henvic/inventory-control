@@ -20,7 +20,7 @@ public class ProductPrototypeRepoArray implements ItemRepo<ProductPrototype> {
 
         newProductPrototypes = new ProductPrototype[length + 1];
 
-        System.arraycopy(productPrototypes, 0, newProductPrototypes, 0, 0);
+        System.arraycopy(productPrototypes, 0, newProductPrototypes, 0, length);
         this.productPrototypes = newProductPrototypes;
 
         productPrototypes[length] = productPrototype;

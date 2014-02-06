@@ -21,7 +21,7 @@ public class ActorRepoArray implements ItemRepo<Actor> {
 
         newActors = new Actor[length + 1];
 
-        System.arraycopy(actors, 0, newActors, 0, 0);
+        System.arraycopy(actors, 0, newActors, 0, length);
         this.actors = newActors;
 
         actors[length] = actor;

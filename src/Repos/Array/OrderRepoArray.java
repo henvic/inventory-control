@@ -20,7 +20,7 @@ public class OrderRepoArray implements ItemRepo<Order> {
 
         newOrders = new Order[length + 1];
 
-        System.arraycopy(orders, 0, newOrders, 0, 0);
+        System.arraycopy(orders, 0, newOrders, 0, length);
         this.orders = newOrders;
 
         orders[length] = order;

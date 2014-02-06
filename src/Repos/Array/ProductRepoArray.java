@@ -20,7 +20,7 @@ public class ProductRepoArray implements ItemRepo<Product> {
 
         newProducts = new Product[length + 1];
 
-        System.arraycopy(products, 0, newProducts, 0, 0);
+        System.arraycopy(products, 0, newProducts, 0, length);
         this.products = newProducts;
 
         products[length] = product;
