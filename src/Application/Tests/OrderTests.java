@@ -45,6 +45,15 @@ public class OrderTests implements Tests {
         return null;
     }
 
+    public boolean closeMockOrder(String id) {
+        try {
+            facade.closeOrder(id);
+            return true;
+        } catch (Exception ignore) {
+        }
+
+        return false;
+    }
 
     public Order readMockOrder(String id) {
         try {
@@ -111,6 +120,7 @@ public class OrderTests implements Tests {
         testRunner.test(this.getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
         testRunner.test(this.addProductToMockOrder(temp), "addProductToMockOrder");
         testRunner.test(this.removeProductFromMockOrder(temp), "removeProductFromMockOrder");
+        testRunner.test(this.closeMockOrder(temp), "closeMockOrder");
         testRunner.test(this.removeMockOrder(temp), "removeMockOrder");
     }
 
