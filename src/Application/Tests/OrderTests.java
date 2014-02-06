@@ -107,11 +107,11 @@ public class OrderTests implements Tests {
         // @todo add missing tests
         temp = this.createMockOrder();
         testRunner.test(temp, "createMockOrder");
-        testRunner.test(readMockOrder(temp), "readMockOrder");
-        testRunner.test(getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
-        testRunner.test(addProductToMockOrder(temp), "addProductToMockOrder");
-        testRunner.test(removeProductFromMockOrder(temp), "removeProductFromMockOrder");
-        testRunner.test(removeMockOrder(temp), "removeMockOrder");
+        testRunner.test(this.readMockOrder(temp), "readMockOrder");
+        testRunner.test(this.getEmptyProductsArrayForMockOrder(temp), "getEmptyProductsArrayForMockOrder");
+        testRunner.test(this.addProductToMockOrder(temp), "addProductToMockOrder");
+        testRunner.test(this.removeProductFromMockOrder(temp), "removeProductFromMockOrder");
+        testRunner.test(this.removeMockOrder(temp), "removeMockOrder");
     }
 
     public OrderTests(Facade facade, TestRunner testRunner) {
