@@ -10,8 +10,13 @@ import Repos.Array.OrderRepoArray;
 public class OrderManager {
     private OrderRepoArray repo;
 
-    public OrderManager(OrderRepoArray repo) {
+    private ActorManager buyerManager;
+    private ActorManager sellerManager;
+
+    public OrderManager(OrderRepoArray repo, ActorManager buyerManager, ActorManager sellerManager) {
         this.repo = repo;
+        this.buyerManager = buyerManager;
+        this.sellerManager = sellerManager;
     }
 
     public void validate(int timestamp, String buyer, String seller)

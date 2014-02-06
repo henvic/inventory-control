@@ -278,6 +278,6 @@ public class Facade {
         actorManager = new ActorManager(new ActorRepoArray()); // just to avoid using static methods
         buyerManager = new BuyerManager(new ActorRepoArray());
         sellerManager = new SellerManager(new ActorRepoArray());
-        orderManager = new OrderManager(new OrderRepoArray());
+        orderManager = new OrderManager(new OrderRepoArray(), buyerManager, sellerManager);
     }
 }
