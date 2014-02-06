@@ -238,7 +238,7 @@ public class Facade {
             product = this.getProduct(this.createProduct(productPrototype, amount));
         }
 
-        if (amount < 1 || amount > productPrototype.getAmount() - product.getAmount()) {
+        if (amount < 1 || productPrototype.getAmount() > amount + product.getAmount()) {
             throw new InvalidInputException("Invalid amount");
         }
 
