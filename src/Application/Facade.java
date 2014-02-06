@@ -95,15 +95,7 @@ public class Facade {
         } catch (ObjectAlreadyExistsException ignore) { // can safely ignore
         }
 
-        actorManager.validate(name, company, email, phone, address, buyer, seller);
-
-        actor.setName(name);
-        actor.setCompany(company);
-        actor.setEmail(email);
-        actor.setPhone(phone);
-        actor.setAddress(address);
-        actor.setBuyer(buyer);
-        actor.setSeller(seller);
+        actorManager.update(actor, name, company, email, phone, address, buyer, seller);
     }
 
     public void removeBuyer(String id) throws ObjectNotFoundException {

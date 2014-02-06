@@ -69,6 +69,20 @@ public class ActorManager {
         return actor;
     }
 
+    public void update(Actor actorToBeUpdated, String name, String company, String email, String phone, String address,
+                       boolean buyer, boolean seller)
+            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+        this.validate(name, company, email, phone, address, buyer, seller);
+
+        actorToBeUpdated.setName(name);
+        actorToBeUpdated.setCompany(company);
+        actorToBeUpdated.setEmail(email);
+        actorToBeUpdated.setPhone(phone);
+        actorToBeUpdated.setAddress(address);
+        actorToBeUpdated.setBuyer(buyer);
+        actorToBeUpdated.setSeller(seller);
+    }
+
     public void remove(String id) throws ObjectNotFoundException {
         boolean removed = repo.remove(id);
 
