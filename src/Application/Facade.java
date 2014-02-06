@@ -236,13 +236,12 @@ public class Facade {
 
         if (product == null) {
             product = this.getProduct(this.createProduct(productPrototype, amount));
+            order.addProduct(product);
         }
 
         if (amount < 1 || productPrototype.getAmount() > amount + product.getAmount()) {
             throw new InvalidInputException("Invalid amount");
         }
-
-        order.addProduct(product);
 
         return product.getId();
     }
