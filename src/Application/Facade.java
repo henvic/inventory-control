@@ -170,14 +170,7 @@ public class Facade {
 
     public void updateProduct(String id, int price, String name, String vendor, int amount)
             throws ObjectNotFoundException, InvalidInputException {
-        Product product = this.getProduct(id);
-
-        productManager.validate(price, name, vendor, amount);
-
-        product.setAmount(amount);
-        product.setPrice(price);
-        product.setName(name);
-        product.setVendor(vendor);
+        productManager.update(id, price, name, vendor, amount);
     }
 
     public void removeProduct(String id) throws ObjectNotFoundException {

@@ -59,11 +59,16 @@ public class ProductManager {
         return product;
     }
 
-    public void update(String id)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+    public void update(String id, int price, String name, String vendor, int amount)
+            throws ObjectNotFoundException, InvalidInputException {
         Product product = this.get(id);
 
         this.validate(product);
+
+        product.setAmount(amount);
+        product.setPrice(price);
+        product.setName(name);
+        product.setVendor(vendor);
 
     }
 
