@@ -56,12 +56,16 @@ public class ProductPrototypeManager {
         return productPrototype;
     }
 
-    public void update(String id)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+    public void update(String id, int price, int amount, String name, String vendor)
+            throws ObjectNotFoundException, InvalidInputException {
+        this.validate(price, amount, name, vendor);
+
         ProductPrototype productPrototype = this.get(id);
 
-        this.validate(productPrototype);
-
+        productPrototype.setPrice(price);
+        productPrototype.setAmount(amount);
+        productPrototype.setName(name);
+        productPrototype.setVendor(vendor);
     }
 
     public void remove(String id) throws ObjectNotFoundException {

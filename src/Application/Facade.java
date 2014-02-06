@@ -145,14 +145,7 @@ public class Facade {
 
     public void updateProductPrototype(String id, int price, int amount, String name, String vendor)
             throws ObjectNotFoundException, InvalidInputException {
-        ProductPrototype productPrototype = this.getProductPrototype(id);
-
-        productPrototypeManager.validate(price, amount, name, vendor);
-
-        productPrototype.setPrice(price);
-        productPrototype.setAmount(amount);
-        productPrototype.setName(name);
-        productPrototype.setVendor(vendor);
+        productPrototypeManager.update(id, price, amount, name, vendor);
     }
 
     public void removeProductPrototype(String id) throws ObjectNotFoundException {
