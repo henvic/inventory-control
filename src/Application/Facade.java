@@ -173,18 +173,6 @@ public class Facade {
             throws ObjectAlreadyExistsException, ObjectNotFoundException, InvalidInputException {
         String id = getUUID(ORDER);
 
-        try {
-            this.buyerManager.get(buyer);
-        } catch (ObjectNotFoundException ignore) {
-            throw new InvalidInputException("buyer");
-        }
-
-        try {
-            this.sellerManager.get(seller);
-        } catch (ObjectNotFoundException ignore) {
-            throw new InvalidInputException("seller");
-        }
-
         orderManager.add(new Order(id, buyer, seller));
         return id;
     }

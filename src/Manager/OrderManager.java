@@ -25,11 +25,15 @@ public class OrderManager {
             throw new InvalidInputException("timestamp < 0");
         }
 
-        if (buyer.length() < 1) {
+        try {
+            buyerManager.get(buyer);
+        } catch (ObjectNotFoundException ignore) {
             throw new InvalidInputException("buyer");
         }
 
-        if (seller.length() < 1) {
+        try {
+            sellerManager.get(seller);
+        } catch (ObjectNotFoundException ignore) {
             throw new InvalidInputException("seller");
         }
     }
