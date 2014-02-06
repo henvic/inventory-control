@@ -215,7 +215,7 @@ public class Facade {
         return orderManager.get(id);
     }
 
-    public String addProductToOrder(String orderId, String productPrototypeId, int amount)
+    private String setProductToOrder(String orderId, String productPrototypeId, int amount, boolean diff)
             throws ObjectNotFoundException, MissingRolesException, InvalidInputException,
             OrderAlreadyClosed, ObjectAlreadyExistsException {
         Order order = this.getOrder(orderId);
@@ -230,6 +230,11 @@ public class Facade {
         for (Product each : this.getProductsFromOrder(orderId)) {
             if (each.getPrototype().equalsIgnoreCase(productPrototypeId)) {
                 product = each;
+
+                if (diff) {
+                    amount = amount + product.getAmount();
+                }
+
                 break;
             }
         }
@@ -245,6 +250,19 @@ public class Facade {
 
         return product.getId();
     }
+
+    public String setProductToOrder(String orderId, String productPrototypeId, int amount) throws Exception {
+        return this.setProductToOrder(orderId, productPrototypeId, amount, false);
+    }
+
+    public String addProductToOrder(String orderId, String productPrototypeId, int amount) throws Exception {
+        return this.setProductToOrder(orderId, productPrototypeId, amount, true);
+    }
+
+    public String removeProductFromOrder(String orderId, String productPrototypeId, int amount) throws Exception {
+        return this.setProductToOrder(orderId, productPrototypeId, - amount, true);
+    }
+
     public Product[] getProductsFromOrder(String id) throws ObjectNotFoundException {
         return orderManager.get(id).getProducts();
     }
