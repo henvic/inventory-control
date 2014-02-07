@@ -1,6 +1,7 @@
 package Application;
 
 import Application.Tests.*;
+import Exceptions.UnavailableRepoTypeException;
 
 public class TestRunner {
     private Facade facade;
@@ -53,6 +54,11 @@ public class TestRunner {
     }
 
     public static void main (String[] args) {
-        new TestRunner(new Facade()).run();
+        try {
+            new TestRunner(new Facade()).run();
+        } catch (UnavailableRepoTypeException ignore) {
+            System.out.println("config.txt não contém tipo de repositório disponível.\n" +
+                    "Use: array ou list ou file\n");
+        }
     }
 }

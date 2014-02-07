@@ -1,5 +1,7 @@
 package Application;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.UUID;
 
 import Exceptions.*;
@@ -9,6 +11,11 @@ import Entities.*;
 import Repos.Array.*;
 
 public class Facade {
+    private final char REPO_TYPE_ARRAY = 'A';
+    private final char REPO_TYPE_LIST = 'L';
+    private final char REPO_TYPE_FILE = 'F';
+    private final char REPO_TYPE_ERROR = 'E';
+
     private final char ACTOR = 'a';
     private final char ORDER = 'o';
     private final char PRODUCT_PROTOTYPE = 'p';
@@ -266,12 +273,46 @@ public class Facade {
         orderManager.remove(id);
     }
 
-    public Facade() {
-        ProductPrototypeRepoInterface productPrototypeRepo = new ProductPrototypeRepoArray();
-        ProductRepoInterface productRepo = new ProductRepoArray();
-        ActorRepoInterface buyerRepo = new ActorRepoArray();
-        ActorRepoInterface sellerRepo = new ActorRepoArray();
-        OrderRepoInterface orderRepo = new OrderRepoArray();
+    private char getRepoType() {
+        String type = "";
+        BufferedReader in;
+
+        try {
+            in = new BufferedReader(new FileReader("config.txt"));
+
+            while (in.ready()) {
+                type += in.readLine();
+            }
+
+            in.close();
+        } catch (Exception ignore) {
+        }
+
+        if (type.length() > 0) {
+            return type.toUpperCase().charAt(0);
+        }
+
+        return REPO_TYPE_ERROR;
+    }
+
+    public Facade() throws UnavailableRepoTypeException {
+        ProductPrototypeRepoInterface productPrototypeRepo;
+        ProductRepoInterface productRepo;
+        ActorRepoInterface buyerRepo;
+        ActorRepoInterface sellerRepo;
+        OrderRepoInterface orderRepo;
+
+        switch (getRepoType()) {
+            case REPO_TYPE_ARRAY:
+                productPrototypeRepo = new ProductPrototypeRepoArray();
+                productRepo = new ProductRepoArray();
+                buyerRepo = new ActorRepoArray();
+                sellerRepo = new ActorRepoArray();
+                orderRepo = new OrderRepoArray();
+                break;
+            default:
+                throw new UnavailableRepoTypeException();
+        }
 
         productPrototypeManager = new ProductPrototypeManager(productPrototypeRepo);
         productManager = new ProductManager(productRepo);
