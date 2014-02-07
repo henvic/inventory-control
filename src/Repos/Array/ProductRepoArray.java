@@ -1,9 +1,9 @@
 package Repos.Array;
 
 import Entities.Product;
-import Interfaces.ItemRepo;
+import Interfaces.ProductRepoInterface;
 
-public class ProductRepoArray implements ItemRepo<Product> {
+public class ProductRepoArray implements ProductRepoInterface {
     private Product[] products;
 
     @Override

@@ -2,12 +2,12 @@ package Manager;
 
 import Entities.*;
 import Exceptions.*;
-import Repos.Array.*;
+import Interfaces.ActorRepoInterface;
 
 public class ActorManager {
-    private ActorRepoArray repo;
+    private ActorRepoInterface repo;
 
-    public ActorManager(ActorRepoArray repo) {
+    public ActorManager(ActorRepoInterface repo) {
         this.repo = repo;
     }
 

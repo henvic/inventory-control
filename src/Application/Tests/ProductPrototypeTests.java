@@ -6,7 +6,7 @@ import Entities.*;
 import Exceptions.*;
 import Interfaces.*;
 
-public class ProductPrototypeTests implements Tests {
+public class ProductPrototypeTests implements TestsInterface {
     private Facade facade;
     private TestRunner testRunner;
 

@@ -3,6 +3,7 @@ package Application;
 import java.util.UUID;
 
 import Exceptions.*;
+import Interfaces.*;
 import Manager.*;
 import Entities.*;
 import Repos.Array.*;
@@ -266,11 +267,18 @@ public class Facade {
     }
 
     public Facade() {
-        productPrototypeManager = new ProductPrototypeManager(new ProductPrototypeRepoArray());
-        productManager = new ProductManager(new ProductRepoArray());
-        actorManager = new ActorManager(new ActorRepoArray()); // just to avoid using static methods
-        buyerManager = new BuyerManager(new ActorRepoArray());
-        sellerManager = new SellerManager(new ActorRepoArray());
-        orderManager = new OrderManager(new OrderRepoArray(), buyerManager, sellerManager);
+        ProductPrototypeRepoInterface productPrototypeRepo = new ProductPrototypeRepoArray();
+        ProductRepoInterface productRepo = new ProductRepoArray();
+        ActorRepoInterface buyerRepo = new ActorRepoArray();
+        ActorRepoInterface sellerRepo = new ActorRepoArray();
+        OrderRepoInterface orderRepo = new OrderRepoArray();
+
+        productPrototypeManager = new ProductPrototypeManager(productPrototypeRepo);
+        productManager = new ProductManager(productRepo);
+        // just to avoid using static methods, the actorManager repo isn't used at all
+        actorManager = new ActorManager(new ActorRepoArray());
+        buyerManager = new BuyerManager(buyerRepo);
+        sellerManager = new SellerManager(sellerRepo);
+        orderManager = new OrderManager(orderRepo, buyerManager, sellerManager);
     }
 }

@@ -1,6 +1,6 @@
 package Interfaces;
 
-public interface ItemRepo<type> {
+public interface ItemRepoInterface<type> {
     public boolean add(type item);
     public boolean remove(String id);
     public type get(String id);

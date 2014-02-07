@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface Tests {
+public interface TestsInterface {
     public void runSuite();
 }

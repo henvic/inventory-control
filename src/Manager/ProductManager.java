@@ -2,15 +2,14 @@ package Manager;
 
 import Entities.Product;
 import Exceptions.InvalidInputException;
-import Exceptions.MissingRolesException;
 import Exceptions.ObjectAlreadyExistsException;
 import Exceptions.ObjectNotFoundException;
-import Repos.Array.ProductRepoArray;
+import Interfaces.ProductRepoInterface;
 
 public class ProductManager {
-    private ProductRepoArray repo;
+    private ProductRepoInterface repo;
 
-    public ProductManager(ProductRepoArray repo) {
+    public ProductManager(ProductRepoInterface repo) {
         this.repo = repo;
     }
 

@@ -2,12 +2,12 @@ package Manager;
 
 import Entities.*;
 import Exceptions.*;
-import Repos.Array.*;
+import Interfaces.ProductPrototypeRepoInterface;
 
 public class ProductPrototypeManager {
-    private ProductPrototypeRepoArray repo;
+    private ProductPrototypeRepoInterface repo;
 
-    public ProductPrototypeManager(ProductPrototypeRepoArray repo) {
+    public ProductPrototypeManager(ProductPrototypeRepoInterface repo) {
         this.repo = repo;
     }
 

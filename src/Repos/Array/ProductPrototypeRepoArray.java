@@ -1,9 +1,9 @@
 package Repos.Array;
 
 import Entities.ProductPrototype;
-import Interfaces.ItemRepo;
+import Interfaces.ProductPrototypeRepoInterface;
 
-public class ProductPrototypeRepoArray implements ItemRepo<ProductPrototype> {
+public class ProductPrototypeRepoArray implements ProductPrototypeRepoInterface {
     private ProductPrototype[] productPrototypes;
 
     @Override

@@ -5,15 +5,15 @@ import Exceptions.InvalidInputException;
 import Exceptions.MissingRolesException;
 import Exceptions.ObjectAlreadyExistsException;
 import Exceptions.ObjectNotFoundException;
-import Repos.Array.OrderRepoArray;
+import Interfaces.OrderRepoInterface;
 
 public class OrderManager {
-    private OrderRepoArray repo;
+    private OrderRepoInterface repo;
 
     private ActorManager buyerManager;
     private ActorManager sellerManager;
 
-    public OrderManager(OrderRepoArray repo, ActorManager buyerManager, ActorManager sellerManager) {
+    public OrderManager(OrderRepoInterface repo, ActorManager buyerManager, ActorManager sellerManager) {
         this.repo = repo;
         this.buyerManager = buyerManager;
         this.sellerManager = sellerManager;

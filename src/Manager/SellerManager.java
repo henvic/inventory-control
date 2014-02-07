@@ -1,9 +1,9 @@
 package Manager;
 
-import Repos.Array.*;
+import Interfaces.ActorRepoInterface;
 
 public class SellerManager extends ActorManager {
-    public SellerManager(ActorRepoArray repo) {
+    public SellerManager(ActorRepoInterface repo) {
         super(repo);
     }
 }

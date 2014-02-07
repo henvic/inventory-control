@@ -1,9 +1,9 @@
 package Repos.Array;
 
 import Entities.Order;
-import Interfaces.ItemRepo;
+import Interfaces.OrderRepoInterface;
 
-public class OrderRepoArray implements ItemRepo<Order> {
+public class OrderRepoArray implements OrderRepoInterface {
     private Order[] orders;
 
     @Override

@@ -6,7 +6,7 @@ import Entities.*;
 import Exceptions.*;
 import Interfaces.*;
 
-public class ActorTests implements Tests {
+public class ActorTests implements TestsInterface {
     private Facade facade;
     private TestRunner testRunner;
 

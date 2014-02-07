@@ -1,10 +1,9 @@
 package Repos.Array;
 
-import Interfaces.ItemRepo;
-
+import Interfaces.ActorRepoInterface;
 import Entities.Actor;
 
-public class ActorRepoArray implements ItemRepo<Actor> {
+public class ActorRepoArray implements ActorRepoInterface {
     private Actor[] actors;
 
     @Override
