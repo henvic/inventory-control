@@ -83,6 +83,6 @@ public class OrderManager {
     }
 
     public void addProduct(String orderId, Product product) {
-        repo.addProduct(orderId, product);
+        repo.addProduct(orderId, product.getId());
     }
 }

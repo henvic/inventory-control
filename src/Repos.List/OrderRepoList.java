@@ -73,7 +73,7 @@ public class OrderRepoList implements OrderRepoInterface {
         return false;
     }
 
-    public void addProduct(String id, Product product) {
+    public void addProduct(String id, String product) {
         this.get(id).addProduct(product);
     }
 }

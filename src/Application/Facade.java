@@ -202,15 +202,17 @@ public class Facade {
         Order order = this.getOrder(orderId);
         ProductPrototype productPrototype = this.getProductPrototype(productPrototypeId);
         Product product = null;
+        Product eachProduct;
 
         if (!order.isOpen()) {
             throw new OrderAlreadyClosed();
         }
 
         //see if the product exists on the order already
-        for (Product each : this.getProductsFromOrder(orderId)) {
-            if (each.getPrototype().equalsIgnoreCase(productPrototypeId)) {
-                product = each;
+        for (String each : this.getProductsFromOrder(orderId)) {
+            eachProduct = this.getProduct(each);
+            if (eachProduct.getPrototype().equalsIgnoreCase(productPrototypeId)) {
+                product = eachProduct;
 
                 if (diff) {
                     amount = amount + product.getAmount();
@@ -244,27 +246,30 @@ public class Facade {
         return this.setProductToOrder(orderId, productPrototypeId, - amount, true);
     }
 
-    public Product[] getProductsFromOrder(String id) throws ObjectNotFoundException {
+    public String[] getProductsFromOrder(String id) throws ObjectNotFoundException {
         return orderManager.get(id).getProducts();
     }
 
     public void closeOrder(String id) throws ObjectNotFoundException, NotEnoughProductsExceptionOnStock {
-        Product[] products;
+        String[] products;
         ProductPrototype productPrototype;
         Order order = this.getOrder(id);
+        Product product;
 
         products = order.getProducts();
 
         //first, verify if there are enough products on the stock to make the order
-        for (Product each : products) {
-            if (this.getProductPrototype(each.getPrototype()).getAmount() < each.getAmount()) {
+        for (String each : products) {
+            product = this.getProduct(each);
+            if (this.getProductPrototype(product.getPrototype()).getAmount() < product.getAmount()) {
                 throw new NotEnoughProductsExceptionOnStock();
             }
         }
 
-        for (Product each : products) {
-            productPrototype = this.getProductPrototype(each.getPrototype());
-            productPrototype.setAmount(productPrototype.getAmount() - each.getAmount());
+        for (String each : products) {
+            product = this.getProduct(each);
+            productPrototype = this.getProductPrototype(product.getPrototype());
+            productPrototype.setAmount(productPrototype.getAmount() - product.getAmount());
         }
 
         order.setOpen(false);
