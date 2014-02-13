@@ -13,6 +13,12 @@ import Repos.File.*;
 import Repos.List.*;
 
 public class Facade {
+    private final String PRODUCT_PROTOTYPE_FILE = "db/prototypes.xls";
+    private final String PRODUCT_FILE = "db/products.xls";
+    private final String BUYER_FILE = "db/buyers.xls";
+    private final String SELLER_FILE = "db/sellers.xls";
+    private final String ORDER_FILE = "db/orders.xls";
+
     private final char REPO_TYPE_ARRAY = 'A';
     private final char REPO_TYPE_LIST = 'L';
     private final char REPO_TYPE_FILE = 'F';
@@ -285,11 +291,11 @@ public class Facade {
                 orderRepo = new OrderRepoList();
                 break;
             case REPO_TYPE_FILE:
-                productPrototypeRepo = new ProductPrototypeRepoFile("db/product-prototypes.xls");
-                productRepo = new ProductRepoFile("db/products.xls");
-                buyerRepo = new ActorRepoFile("db/buyers.xls");
-                sellerRepo = new ActorRepoFile("db/sellers.xls");
-                orderRepo = new OrderRepoFile("db/orders.xls");
+                productPrototypeRepo = new ProductPrototypeRepoFile(PRODUCT_PROTOTYPE_FILE);
+                productRepo = new ProductRepoFile(PRODUCT_FILE);
+                buyerRepo = new ActorRepoFile(BUYER_FILE);
+                sellerRepo = new ActorRepoFile(SELLER_FILE);
+                orderRepo = new OrderRepoFile(ORDER_FILE);
                 break;
             default:
                 throw new UnavailableRepoTypeException();
