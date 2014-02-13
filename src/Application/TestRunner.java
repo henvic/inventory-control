@@ -58,7 +58,8 @@ public class TestRunner {
             new TestRunner(new Facade()).run();
         } catch (UnavailableRepoTypeException ignore) {
             System.out.println("config.txt não contém tipo de repositório disponível.\n" +
-                    "Use: array ou list ou file\n");
+                    "Use: array ou list ou file\n" +
+                    "Note: no clean up is made for file.\n");
         }
     }
 }
