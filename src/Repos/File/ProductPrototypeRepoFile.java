@@ -180,7 +180,14 @@ public class ProductPrototypeRepoFile implements ProductPrototypeRepoInterface {
                 row.getCell(NAME_CELL_COLUMN).setCellValue(name);
                 row.getCell(VENDOR_CELL_COLUMN).setCellValue(vendor);
 
-                return true;
+                try {
+                    output = new FileOutputStream(handle);
+                    workbook.write(output);
+                    output.close();
+                    return true;
+                } catch (IOException ignore) {
+                    break;
+                }
             }
         }
 
