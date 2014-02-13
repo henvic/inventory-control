@@ -2,7 +2,6 @@ package Manager;
 
 import Entities.Order;
 import Exceptions.InvalidInputException;
-import Exceptions.MissingRolesException;
 import Exceptions.ObjectAlreadyExistsException;
 import Exceptions.ObjectNotFoundException;
 import Interfaces.OrderRepoInterface;
@@ -67,7 +66,7 @@ public class OrderManager {
     }
 
     public void update(String id, String buyer, String seller)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+            throws ObjectNotFoundException, InvalidInputException {
         Order order = this.get(id);
 
         this.validate(order.getTimestamp(), buyer, seller);

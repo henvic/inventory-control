@@ -10,63 +10,42 @@ public class ActorTests implements TestsInterface {
     private Facade facade;
     private TestRunner testRunner;
 
-    public boolean cantCreateMockActorWithNoRole() {
+    public String createMockSeller() {
         try {
-            facade.createActor("Joseph",
+            return facade.createSeller("Joseph",
                     "",
                     "foo@example.com",
                     "+55114141414",
-                    "5th Ave, 140 NYC",
-                    false,
-                    false);
-        } catch (MissingRolesException ignore) {
-            return true;
-        } catch (InvalidInputException ignore) {
-        }
-
-        return false;
-    }
-
-    public String createMockActor() {
-        try {
-            return facade.createActor("Joseph",
-                    "",
-                    "foo@example.com",
-                    "+55114141414",
-                    "5th Ave, 140 NYC",
-                    true,
-                    false);
-        } catch (MissingRolesException ignore) {
+                    "5th Ave, 140 NYC");
         } catch (InvalidInputException ignore) {
         }
 
         return null;
     }
 
-    public Actor readMockActor(String id) {
+    public Actor readMockSeller(String id) {
         try {
-            return facade.getActor(id);
+            return facade.getSeller(id);
         } catch (ObjectNotFoundException ignore) {
         }
 
         return null;
     }
 
-    public boolean updateMockActor(String id) {
+    public boolean updateMockSeller(String id) {
         try {
-            facade.updateActor(id, "John", "PB", "foo@example.net", "1-414-141-444", "K 140, D.C.", true, false);
+            facade.updateSeller(id, "John", "PB", "foo@example.net", "1-414-141-444", "K 140, D.C.");
             return true;
         } catch (ObjectNotFoundException ignore) {
-        } catch (MissingRolesException ignore) {
         } catch (InvalidInputException ignore) {
         }
 
         return false;
     }
 
-    public boolean removeMockActor(String id) {
+    public boolean removeMockSeller(String id) {
         try {
-            facade.removeActor(id);
+            facade.removeSeller(id);
             return true;
         } catch (ObjectNotFoundException ignore) {
         }
@@ -78,12 +57,11 @@ public class ActorTests implements TestsInterface {
         String temp;
 
         // @todo add missing tests
-        testRunner.test(this.cantCreateMockActorWithNoRole(), "cantCreateMockActorWithNoRole");
-        temp = this.createMockActor();
-        testRunner.test(temp, "createMockActor");
-        testRunner.test(this.updateMockActor(temp), "updateMockActor");
-        testRunner.test(this.readMockActor(temp), "readMockActor");
-        testRunner.test(this.removeMockActor(temp), "removeMockActor");
+        temp = this.createMockSeller();
+        testRunner.test(temp, "createMockSeller");
+        testRunner.test(this.updateMockSeller(temp), "updateMockSeller");
+        testRunner.test(this.readMockSeller(temp), "readMockSeller");
+        testRunner.test(this.removeMockSeller(temp), "removeMockSeller");
     }
 
     public ActorTests(Facade facade, TestRunner testRunner) {

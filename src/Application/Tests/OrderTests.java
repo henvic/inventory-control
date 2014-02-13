@@ -17,21 +17,17 @@ public class OrderTests implements TestsInterface {
         String seller;
 
         try {
-            buyer = facade.createActor("Buyer #1",
+            buyer = facade.createBuyer("Buyer #1",
                     "Example Company",
                     "foo@example.com",
                     "+55 11 4444-4444",
-                    "5th Ave, 140 NYC",
-                    true,
-                    false);
+                    "5th Ave, 140 NYC");
 
-            seller = facade.createActor("Seller #2",
+            seller = facade.createSeller("Seller #2",
                     "",
                     "",
                     "+55 88 8888-8888",
-                    "Cin, UFPE",
-                    false,
-                    true);
+                    "Cin, UFPE");
         } catch (Exception ignore) {
             return null;
         }
@@ -47,13 +43,11 @@ public class OrderTests implements TestsInterface {
     public boolean updateMockOrder(String id) {
         try {
             Order order = facade.getOrder(id);
-            String seller = facade.createActor("Seller #3",
+            String seller = facade.createSeller("Seller #3",
                     "",
                     "",
                     "+55 88 8888-8888",
-                    "Cin, UFPE",
-                    false,
-                    true);
+                    "Cin, UFPE");
 
             facade.updateOrder(id, order.getBuyer(), seller);
 

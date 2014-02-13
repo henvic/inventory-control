@@ -11,8 +11,8 @@ public class ActorManager {
         this.repo = repo;
     }
 
-    public void validate(String name, String company, String email, String phone, String address,
-                         boolean buyer, boolean seller) throws MissingRolesException, InvalidInputException {
+    public void validate(String name, String company, String email, String phone, String address)
+            throws InvalidInputException {
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
                 "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -35,19 +35,14 @@ public class ActorManager {
         if (address.length() < 1) {
             throw new InvalidInputException("address");
         }
-
-        if (!buyer && !seller) {
-            throw new MissingRolesException();
-        }
     }
 
-    public void validate(Actor actor) throws MissingRolesException, InvalidInputException {
-        this.validate(actor.getName(), actor.getCompany(), actor.getEmail(), actor.getPhone(),
-                actor.getAddress(), actor.isBuyer(), actor.isSeller());
+    public void validate(Actor actor) throws InvalidInputException {
+        this.validate(actor.getName(), actor.getCompany(), actor.getEmail(), actor.getPhone(), actor.getAddress());
     }
 
     public void add(Actor item)
-            throws ObjectAlreadyExistsException, MissingRolesException, InvalidInputException {
+            throws ObjectAlreadyExistsException, InvalidInputException {
         this.validate(item);
 
         if (repo.has(item.getId())) {
@@ -69,18 +64,11 @@ public class ActorManager {
         return actor;
     }
 
-    public void update(Actor actorToBeUpdated, String name, String company, String email, String phone, String address,
-                       boolean buyer, boolean seller)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
-        this.validate(name, company, email, phone, address, buyer, seller);
+    public void update(String id, String name, String company, String email, String phone, String address)
+            throws ObjectNotFoundException, InvalidInputException {
+        this.validate(name, company, email, phone, address);
 
-        actorToBeUpdated.setName(name);
-        actorToBeUpdated.setCompany(company);
-        actorToBeUpdated.setEmail(email);
-        actorToBeUpdated.setPhone(phone);
-        actorToBeUpdated.setAddress(address);
-        actorToBeUpdated.setBuyer(buyer);
-        actorToBeUpdated.setSeller(seller);
+        repo.update(id, name, company, email, phone, address);
     }
 
     public void remove(String id) throws ObjectNotFoundException {

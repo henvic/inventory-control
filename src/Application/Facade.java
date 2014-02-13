@@ -25,7 +25,6 @@ public class Facade {
 
     private ProductPrototypeManager productPrototypeManager;
     private ProductManager productManager;
-    private ActorManager actorManager;
     private BuyerManager buyerManager;
     private SellerManager sellerManager;
     private OrderManager orderManager;
@@ -34,26 +33,37 @@ public class Facade {
         return type + "-" + UUID.randomUUID().toString();
     }
 
-    public String createActor(String name, String company, String email, String phone, String address,
-                              boolean buyer, boolean seller)
-            throws MissingRolesException, InvalidInputException {
+    public String createBuyer(String name, String company, String email, String phone, String address)
+            throws InvalidInputException {
         String id = this.getUUID(ACTOR);
         Actor actor;
 
-        actor = new Actor(id, name, company, email, phone, address, buyer, seller);
+        actor = new Actor(id, name, company, email, phone, address);
 
-        actorManager.validate(name, company, email, phone, address, buyer, seller);
+        buyerManager.validate(name, company, email, phone, address);
 
         try {
-            if (buyer) {
-                buyerManager.add(actor);
-            }
-
-            if (seller) {
-                sellerManager.add(actor);
-            }
+            buyerManager.add(actor);
         } catch (ObjectAlreadyExistsException ignore) {
         //safe to assume it's never going to happen
+        }
+
+        return id;
+    }
+
+    public String createSeller(String name, String company, String email, String phone, String address)
+            throws InvalidInputException {
+        String id = this.getUUID(ACTOR);
+        Actor actor;
+
+        actor = new Actor(id, name, company, email, phone, address);
+
+        sellerManager.validate(name, company, email, phone, address);
+
+        try {
+            sellerManager.add(actor);
+        } catch (ObjectAlreadyExistsException ignore) {
+            //safe to assume it's never going to happen
         }
 
         return id;
@@ -67,45 +77,14 @@ public class Facade {
         return sellerManager.get(id);
     }
 
-    public Actor getActor(String id) throws ObjectNotFoundException {
-        try {
-            return this.getSeller(id);
-        } catch (ObjectNotFoundException ignore) {
-        }
-
-        try {
-            return this.getBuyer(id);
-        } catch (ObjectNotFoundException ignore) {
-        }
-
-        throw new ObjectNotFoundException();
+    public void updateBuyer(String id, String name, String company, String email, String phone, String address)
+            throws ObjectNotFoundException, InvalidInputException {
+        buyerManager.update(id, name, company, email, phone, address);
     }
 
-    public void updateActor(String id, String name, String company, String email, String phone, String address,
-                             boolean buyer, boolean seller)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
-        Actor actor = this.getActor(id);
-
-        try {
-            if (buyer && !actor.isBuyer()) {
-                buyerManager.add(actor);
-            }
-
-            if (!buyer && actor.isBuyer()) {
-                buyerManager.remove(id);
-            }
-
-            if (seller && !actor.isSeller()) {
-                sellerManager.add(actor);
-            }
-
-            if (!seller && actor.isSeller()) {
-                sellerManager.remove(id);
-            }
-        } catch (ObjectAlreadyExistsException ignore) { // can safely ignore
-        }
-
-        actorManager.update(actor, name, company, email, phone, address, buyer, seller);
+    public void updateSeller(String id, String name, String company, String email, String phone, String address)
+            throws ObjectNotFoundException, InvalidInputException {
+        sellerManager.update(id, name, company, email, phone, address);
     }
 
     public void removeBuyer(String id) throws ObjectNotFoundException {
@@ -114,25 +93,6 @@ public class Facade {
 
     public void removeSeller(String id) throws ObjectNotFoundException {
         sellerManager.remove(id);
-    }
-
-    public void removeActor(String id) throws ObjectNotFoundException {
-        // verify if actor exists in either the buyer / seller repo
-        // and if not, let getActor throw a ObjectNotFoundException
-        // which won't be catch here
-        this.getActor(id);
-
-        try {
-            this.removeBuyer(id);
-        } catch (ObjectNotFoundException ignore) {// can safely ignore
-        }
-
-        //it's necessary this second block, otherwise a actor who is
-        //a seller but not a buyer won't get removed
-        try {
-            this.removeSeller(id);
-        } catch (ObjectNotFoundException ignore) {// can safely ignore
-        }
     }
 
     public String createProductPrototype(String id, int price, int amount, String name, String vendor)
@@ -336,8 +296,6 @@ public class Facade {
 
         productPrototypeManager = new ProductPrototypeManager(productPrototypeRepo);
         productManager = new ProductManager(productRepo);
-        // just to avoid using static methods, the actorManager repo isn't used at all
-        actorManager = new ActorManager(new ActorRepoArray());
         buyerManager = new BuyerManager(buyerRepo);
         sellerManager = new SellerManager(sellerRepo);
         orderManager = new OrderManager(orderRepo, buyerManager, sellerManager);
