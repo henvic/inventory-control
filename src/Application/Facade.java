@@ -158,12 +158,12 @@ public class Facade {
     }
 
     public void updateOrder(String id, String buyer, String seller)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
+            throws ObjectNotFoundException, InvalidInputException {
         orderManager.update(id, buyer, seller);
     }
 
     private String setProductToOrder(String orderId, String productPrototypeId, int amount, boolean diff)
-            throws ObjectNotFoundException, MissingRolesException, InvalidInputException,
+            throws ObjectNotFoundException, InvalidInputException,
             OrderAlreadyClosed, ObjectAlreadyExistsException {
         Order order = this.getOrder(orderId);
         ProductPrototype productPrototype = this.getProductPrototype(productPrototypeId);
