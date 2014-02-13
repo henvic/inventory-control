@@ -11,7 +11,7 @@ Controle de estoque (entrada / saída de produtos).
 * ProductAbstract: id, price (suggested), amount, name, vendor
 * ProductPrototype: estende ProductPrototype
 * Product: estende ProductAbstract + armazena propriedade de referência p/ id de ProductPrototype no atributo prototype
-* Order: id, Product[], date, state (aberto, fechado), amount, seller (id do Actor), buyer (id da Actor)
+* Order: id, Product[], date, state (aberto, fechado), seller (id do Actor), buyer (id da Actor)
 * Actor (id, name, company (opcional), email, phone, address)
 
 ## Relações entre entidades

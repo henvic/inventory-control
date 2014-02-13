@@ -7,12 +7,7 @@ public class Order extends Item {
     private boolean open = true;
     private String buyer;
     private String seller;
-    private int amount;
     private ArrayList<Product> products;
-
-    public Order(String id) {
-        super(id);
-    }
 
     public int getTimestamp() {
         return timestamp;
@@ -46,14 +41,6 @@ public class Order extends Item {
         this.seller = seller;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public Product[] getProducts() {
         return products.toArray(new Product[products.size()]);
     }
@@ -66,12 +53,15 @@ public class Order extends Item {
         products.remove(product);
     }
 
+    public Order(String id) {
+        super(id);
+    }
+
     public Order(String id, String buyer, String seller) {
         super(id);
         this.products = new ArrayList<Product>();
         this.open = true;
         this.buyer = buyer;
         this.seller = seller;
-        this.amount = 0;
     }
 }
