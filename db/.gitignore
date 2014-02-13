@@ -1,0 +1,4 @@
+# don't delete this file or the data persistence will not work if this repo is cloned
+!.gitignore
+
+*.xls
