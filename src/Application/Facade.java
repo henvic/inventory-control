@@ -9,6 +9,7 @@ import Interfaces.*;
 import Manager.*;
 import Entities.*;
 import Repos.Array.*;
+import Repos.File.*;
 import Repos.List.*;
 
 public class Facade {
@@ -318,6 +319,12 @@ public class Facade {
                 sellerRepo = new ActorRepoList();
                 orderRepo = new OrderRepoList();
                 break;
+            case REPO_TYPE_FILE:
+                productPrototypeRepo = new ProductPrototypeRepoFile("db/product-prototypes.xls");
+                productRepo = new ProductRepoFile("db/products.xls");
+                buyerRepo = new ActorRepoArray();
+                sellerRepo = new ActorRepoArray();
+                orderRepo = new OrderRepoArray();
             default:
                 throw new UnavailableRepoTypeException();
         }
