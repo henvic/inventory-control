@@ -329,7 +329,7 @@ public class Facade {
                 productRepo = new ProductRepoFile("db/products.xls");
                 buyerRepo = new ActorRepoArray();
                 sellerRepo = new ActorRepoArray();
-                orderRepo = new OrderRepoArray();
+                orderRepo = new OrderRepoFile("db/order.xls");
             default:
                 throw new UnavailableRepoTypeException();
         }
