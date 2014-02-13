@@ -287,9 +287,9 @@ public class Facade {
             case REPO_TYPE_FILE:
                 productPrototypeRepo = new ProductPrototypeRepoFile("db/product-prototypes.xls");
                 productRepo = new ProductRepoFile("db/products.xls");
-                buyerRepo = new ActorRepoArray();
-                sellerRepo = new ActorRepoArray();
-                orderRepo = new OrderRepoFile("db/order.xls");
+                buyerRepo = new ActorRepoFile("db/buyers.xls");
+                sellerRepo = new ActorRepoFile("db/sellers.xls");
+                orderRepo = new OrderRepoFile("db/orders.xls");
                 break;
             default:
                 throw new UnavailableRepoTypeException();
