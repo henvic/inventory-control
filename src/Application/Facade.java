@@ -9,6 +9,7 @@ import Interfaces.*;
 import Manager.*;
 import Entities.*;
 import Repos.Array.*;
+import Repos.List.*;
 
 public class Facade {
     private final char REPO_TYPE_ARRAY = 'A';
@@ -309,6 +310,13 @@ public class Facade {
                 buyerRepo = new ActorRepoArray();
                 sellerRepo = new ActorRepoArray();
                 orderRepo = new OrderRepoArray();
+                break;
+            case REPO_TYPE_LIST:
+                productPrototypeRepo = new ProductPrototypeRepoList();
+                productRepo = new ProductRepoList();
+                buyerRepo = new ActorRepoList();
+                sellerRepo = new ActorRepoList();
+                orderRepo = new OrderRepoList();
                 break;
             default:
                 throw new UnavailableRepoTypeException();
