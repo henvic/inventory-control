@@ -59,4 +59,15 @@ public class ActorRepoList implements ActorRepoInterface {
     public boolean has(String id) {
         return this.get(id) != null;
     }
+
+    public boolean update(String id, String name, String company, String email, String phone, String address) {
+        Actor actor = this.get(id);
+
+        actor.setName(name);
+        actor.setCompany(company);
+        actor.setEmail(email);
+        actor.setPhone(phone);
+        actor.setAddress(address);
+        return true;
+    }
 }

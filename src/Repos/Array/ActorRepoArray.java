@@ -67,6 +67,17 @@ public class ActorRepoArray implements ActorRepoInterface {
         return false;
     }
 
+    public boolean update(String id, String name, String company, String email, String phone, String address) {
+        Actor actor = this.get(id);
+
+        actor.setName(name);
+        actor.setCompany(company);
+        actor.setEmail(email);
+        actor.setPhone(phone);
+        actor.setAddress(address);
+        return true;
+    }
+
     public ActorRepoArray() {
         this.actors = new Actor[1];
     }
