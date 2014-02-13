@@ -67,6 +67,20 @@ public class ProductRepoArray implements ProductRepoInterface {
         return false;
     }
 
+    public boolean update(String id, int price, String name, String vendor, int amount) {
+        Product product = this.get(id);
+
+        if (product != null) {
+            product.setAmount(amount);
+            product.setPrice(price);
+            product.setName(name);
+            product.setVendor(vendor);
+            return true;
+        }
+
+        return false;
+    }
+
     public ProductRepoArray() {
         this.products = new Product[1];
     }

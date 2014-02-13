@@ -59,4 +59,18 @@ public class ProductRepoList implements ProductRepoInterface {
     public boolean has(String id) {
         return this.get(id) != null;
     }
+
+    public boolean update(String id, int price, String name, String vendor, int amount) {
+        Product product = this.get(id);
+
+        if (product != null) {
+            product.setAmount(amount);
+            product.setPrice(price);
+            product.setName(name);
+            product.setVendor(vendor);
+            return true;
+        }
+
+        return false;
+    }
 }

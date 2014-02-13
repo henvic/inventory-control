@@ -67,6 +67,20 @@ public class ProductPrototypeRepoArray implements ProductPrototypeRepoInterface 
         return false;
     }
 
+    public boolean update(String id, int price, int amount, String name, String vendor) {
+        ProductPrototype productPrototype = this.get(id);
+
+        if (productPrototype != null) {
+            productPrototype.setPrice(price);
+            productPrototype.setAmount(amount);
+            productPrototype.setName(name);
+            productPrototype.setVendor(vendor);
+            return true;
+        }
+
+        return false;
+    }
+
     public ProductPrototypeRepoArray() {
         this.productPrototypes = new ProductPrototype[1];
     }

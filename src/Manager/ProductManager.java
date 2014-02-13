@@ -60,15 +60,8 @@ public class ProductManager {
 
     public void update(String id, int price, String name, String vendor, int amount)
             throws ObjectNotFoundException, InvalidInputException {
-        Product product = this.get(id);
-
-        this.validate(product);
-
-        product.setAmount(amount);
-        product.setPrice(price);
-        product.setName(name);
-        product.setVendor(vendor);
-
+        this.validate(price, name, vendor, amount);
+        repo.update(id, price, name, vendor, amount);
     }
 
     public void remove(String id) throws ObjectNotFoundException {

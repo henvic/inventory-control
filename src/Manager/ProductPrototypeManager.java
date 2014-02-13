@@ -59,13 +59,7 @@ public class ProductPrototypeManager {
     public void update(String id, int price, int amount, String name, String vendor)
             throws ObjectNotFoundException, InvalidInputException {
         this.validate(price, amount, name, vendor);
-
-        ProductPrototype productPrototype = this.get(id);
-
-        productPrototype.setPrice(price);
-        productPrototype.setAmount(amount);
-        productPrototype.setName(name);
-        productPrototype.setVendor(vendor);
+        repo.update(id, price, amount, name, vendor);
     }
 
     public void remove(String id) throws ObjectNotFoundException {

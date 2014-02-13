@@ -1,6 +1,7 @@
 package Repos.List;
 
 import Entities.Order;
+import Entities.Product;
 import Interfaces.OrderRepoInterface;
 
 public class OrderRepoList implements OrderRepoInterface {
@@ -58,5 +59,21 @@ public class OrderRepoList implements OrderRepoInterface {
 
     public boolean has(String id) {
         return this.get(id) != null;
+    }
+
+    public boolean update(String id, String buyer, String seller) {
+        Order order = this.get(id);
+
+        if (order != null) {
+            order.setBuyer(buyer);
+            order.setSeller(seller);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void addProduct(String id, Product product) {
+        this.get(id).addProduct(product);
     }
 }

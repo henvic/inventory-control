@@ -221,7 +221,7 @@ public class Facade {
 
         if (product == null) {
             product = this.getProduct(this.createProduct(productPrototype, amount));
-            order.addProduct(product);
+            orderManager.addProduct(orderId, product);
         }
 
         if (amount < 1 || productPrototype.getAmount() > amount + product.getAmount()) {

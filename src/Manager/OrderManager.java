@@ -6,6 +6,7 @@ import Exceptions.MissingRolesException;
 import Exceptions.ObjectAlreadyExistsException;
 import Exceptions.ObjectNotFoundException;
 import Interfaces.OrderRepoInterface;
+import Entities.*;
 
 public class OrderManager {
     private OrderRepoInterface repo;
@@ -69,10 +70,8 @@ public class OrderManager {
             throws ObjectNotFoundException, MissingRolesException, InvalidInputException {
         Order order = this.get(id);
 
-        this.validate(order);
-
-        order.setBuyer(buyer);
-        order.setSeller(seller);
+        this.validate(order.getTimestamp(), buyer, seller);
+        repo.update(id, buyer, seller);
     }
 
     public void remove(String id) throws ObjectNotFoundException {
@@ -81,5 +80,9 @@ public class OrderManager {
         if (!removed) {
             throw new ObjectNotFoundException();
         }
+    }
+
+    public void addProduct(String orderId, Product product) {
+        repo.addProduct(orderId, product);
     }
 }
